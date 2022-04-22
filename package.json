@@ -13,7 +13,7 @@
 	"publisher": "electropol-fr",
 	"repository": {
 		"type": "Git",
-		"url": "https://github.com/FrankSAURET/micro-bit-fr"
+		"url": "https://github.com/FrankSAURET/microbit-explorer"
 	},
 	"license": "MIT, GPL3",
 	"engines": {
@@ -26,28 +26,28 @@
 	},
 	"badges": [
 		{
-			"url": "https://badgen.net/github/stars/FrankSAURET/micro-bit-fr?icon=github",
-			"href": "https://github.com/FrankSAURET/micro-bit-fr/stargazers",
+			"url": "https://badgen.net/github/stars/FrankSAURET/microbit-explorer?icon=github",
+			"href": "https://github.com/FrankSAURET/microbit-explorer/stargazers",
 			"description": "stars"
 		},
 		{
-			"url": "https://badgen.net/github/open-issues/FrankSAURET/micro-bit-fr?icon=github",
-			"href": "https://github.com/FrankSAURET/micro-bit-fr/issues",
+			"url": "https://badgen.net/github/open-issues/FrankSAURET/microbit-explorer?icon=github",
+			"href": "https://github.com/FrankSAURET/microbit-explorer/issues",
 			"description": "open issues"
 		},
 		{
-			"url": "https://badgen.net/github/last-commit/FrankSAURET/micro-bit-fr?icon=github",
-			"href": "https://github.com/FrankSAURET/micro-bit-fr/commits/master",
+			"url": "https://badgen.net/github/last-commit/FrankSAURET/microbit-explorer?icon=github",
+			"href": "https://github.com/FrankSAURET/microbit-explorer/commits/master",
 			"description": "last commit"
 		},
 		{
-			"url": "https://badgen.net/github/forks/FrankSAURET/micro-bit-fr?icon=github",
-			"href": "https://marketplace.visualstudio.com/items?itemName=electropol-fr.micro-bit-fr&ssr=false#overview",
+			"url": "https://badgen.net/github/forks/FrankSAURET/microbit-explorer?icon=github",
+			"href": "https://marketplace.visualstudio.com/items?itemName=electropol-fr.microbit-explorer&ssr=false#overview",
 			"description": "forks"
 		},
 		{
-			"url": "https://badgen.net/github/license/FrankSAURET/micro-bit-fr?icon=github",
-			"href": "https://marketplace.visualstudio.com/items/electropol-fr.micro-bit-fr/license",
+			"url": "https://badgen.net/github/license/FrankSAURET/microbit-explorer?icon=github",
+			"href": "https://marketplace.visualstudio.com/items/electropol-fr.microbit-explorer/license",
 			"description": "license"
 		}
 	],

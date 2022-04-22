@@ -17,7 +17,7 @@ And also on:
 Thanks for their work.
 <p align="center">
 <a href="https://marketplace.visualstudio.com/items?itemName=electropol-fr.microbit-explorer"><img src="https://badgen.net/vs-marketplace/v/electropol-fr.microbit-explorer?icon=visualstudio" alt="vs-marketplace version"></a>
-<a href="https://github.com/FrankSAURET/microbit-explorer"><img src="https://badgen.net/github/last-commit/black/FrankSAURET/microbit-explorer?icon=github" alt="Github last commit"></a>
+<a href="https://github.com/FrankSAURET/microbit-explorer"><img src="https://badgen.net/github/last-commit/FrankSAURET/microbit-explorer?icon=github" alt="Github last commit"></a>
 <img src="https://badgen.net/vs-marketplace/i/electropol-fr.microbit-explorer" alt="vs-marketplace installs">
 <img src="https://badgen.net/vs-marketplace/d/electropol-fr.microbit-explorer?color=cyan" alt="vs-marketplace downloads">
 <img src="https://badgen.net/vs-marketplace/rating/electropol-fr.microbit-explorer" alt="vs-marketplace rating">
