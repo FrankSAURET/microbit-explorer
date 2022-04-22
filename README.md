@@ -16,11 +16,11 @@ And also on:
 
 Thanks for their work.
 <p align="center">
-<a href="https://marketplace.visualstudio.com/items?itemName=electropol-fr.micro-bit-fr"><img src="https://badgen.net/vs-marketplace/v/electropol-fr.micro-bit-fr?icon=visualstudio" alt="vs-marketplace version"></a>
-<a href="https://github.com/FrankSAURET/micro-bit-fr"><img src="https://badgen.net/github/last-commit/FrankSAURET/micro-bit-fr?icon=github" alt="lien github"></a>
-<img src="https://badgen.net/vs-marketplace/i/electropol-fr.micro-bit-fr" alt="vs-marketplace installs">
-<img src="https://badgen.net/vs-marketplace/d/electropol-fr.micro-bit-fr" alt="vs-marketplace downloads">
-<img src="https://badgen.net/vs-marketplace/rating/electropol-fr.micro-bit-fr" alt="vs-marketplace rating">
+<a href="https://marketplace.visualstudio.com/items?itemName=electropol-fr.microbit-explorer"><img src="https://badgen.net/vs-marketplace/v/electropol-fr.microbit-explorer?icon=visualstudio" alt="vs-marketplace version"></a>
+<a href="https://github.com/FrankSAURET/microbit-explorer"><img src="https://badgen.net/github/last-commit/FrankSAURET/microbit-explorer?icon=github" alt="lien github"></a>
+<img src="https://badgen.net/vs-marketplace/i/electropol-fr.microbit-explorer" alt="vs-marketplace installs">
+<img src="https://badgen.net/vs-marketplace/d/electropol-fr.microbit-explorer" alt="vs-marketplace downloads">
+<img src="https://badgen.net/vs-marketplace/rating/electropol-fr.microbit-explorer" alt="vs-marketplace rating">
 </p>
 
 ![Explorer file on Micro:bit!](image/first_view.png "Explorer file on Micro:bit")
