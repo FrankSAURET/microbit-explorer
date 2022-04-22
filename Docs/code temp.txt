@@ -1,0 +1,83 @@
+	public async ResetMicroBit(): Promise<void> {//@note ResetMicroBit
+		if (typeof this.serialPort === "undefined" || !this.serialPort.isOpen) {
+			vscode.window.showInformationMessage("Serial isn't connected");
+			return;
+		}
+
+		await this.StopRunning();
+
+		await this.SendAndRecv("import machine\r\n", false);
+		await this.SendAndRecv("machine.reset()\r\n", false);
+
+		this.refresh();
+	}
+
+    	async UploadFile2(file: string, target: string): Promise<void> {
+		//@note UploadFile2
+		let result = await this.SendAndRecv("f = open('" + target + "', 'w')\r\n", false);
+		let commentaire: boolean = false;
+		let ligneVide: boolean = false;
+		const clearComments = this.clearComments;
+
+		var lineReader = require('readline').createInterface({
+			input: require('fs').createReadStream(file)
+		});
+		lineReader.on('line', async function (line) {
+			if (clearComments) {
+				line = line.trimEnd();// Suppression des espaces en fin  de ligne
+				line = line.replace(/#.*/g, ""); // Suppression des commentaires mono ligne #
+				line = line.replace(/^\s*"{3}(.+?)"{3}/g, ""); // Suppression des commentaires mono ligne """
+				if (line.match(/^\s*"{3}/) && !commentaire) {// Suppression des commentaires multi ligne
+					commentaire = true;
+					line = line.replace(/"{3}.*/, "");
+				}
+				if (line.match(/"{3}/) && commentaire) {// Suppression des commentaires multi ligne
+					commentaire = false;
+					line = line.replace(/.*"{3}/, "");
+				}
+				line.trimStart() == "" ? ligneVide = true : ligneVide = false
+			}
+			if (!commentaire && !ligneVide) {
+				line = line.replace(/'/g, "\\x27");
+				line = line.trimEnd();// Suppression des espaces en fin  de ligne
+				line = line + "\\x0A";
+				result = await this.SendAndRecv("f.write(" + line + ")\r\n", false);
+			}
+		});
+		result = await this.SendAndRecv("f.close()\r\n", false);
+	}
+	async UploadFile(file: string, target: string): Promise<void> {
+		//@note UploadFile
+		let data = await fs.readFile(file, "utf-8");
+		data = data.replace(/\r/g, "");
+		//this.clearComments = false;
+		if (this.clearComments) {
+			data = data.trimEnd(); // Suppression des espaces en fin  de ligne
+			data = data.replace(/#.*/g, ""); // Suppression des commentaires qui débutent par #
+			data = data.replace(/^\s*"{3}.*?"{3}/sgm, ""); // Suppression des commentaires entre """
+			data = data.replace(/\n(\s)*\n/g, "\n");// Suppression des ligne vides
+			data = data.replace(/^\n/, "");// Suppression d'un ligne vide au début du fichier
+		}
+		data = data.replace(/\n/g, "\\x0A");
+		data = data.replace(/'/g, "\\x27");
+
+		let result: string;
+		let fileShort = file.split('\\').pop().split('/').pop();
+		try {
+			result = await this.SendAndRecv("f = open('" + target + "', 'w')\r\n", false);
+			result = await this.SendAndRecv("f.write(b'" + data + "')\r\n", false);
+			let NombreDeCaractere = parseInt(result, 10);
+			if (isNaN(NombreDeCaractere)) {
+				throw new Error("Ce n'est pas un nombre !");
+			}
+			result = await this.SendAndRecv("f.close()\r\n", false);
+			vscode.window.showInformationMessage("File « " + fileShort + " » is now on micro:bit « " + target + " » on " + this.serialPort.path);
+		}
+		catch (e) {
+			this.MicroBitOutput.appendLine(result);
+			vscode.window.showWarningMessage("Error: Unable to send « " + fileShort + " » to micro:bit.");
+		}
+		finally {
+
+		}
+	}

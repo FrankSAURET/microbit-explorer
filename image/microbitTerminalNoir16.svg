@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   role="img"
+   viewBox="0 0 16.000001 16.000001"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="microbitTerminal.svg"
+   width="16"
+   height="16"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     id="namedview8"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     units="px"
+     inkscape:zoom="29.958333"
+     inkscape:cx="11.98331"
+     inkscape:cy="12"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6" />
+  <title
+     id="title2">micro:bit icon</title>
+  <path
+     d="M 5.2142084,4.5425874 A 3.7185418,3.461447 0 0 0 1.5,8.0000006 3.718,3.4609427 0 0 0 5.2142084,11.457413 H 10.786335 A 3.7174584,3.4604385 0 0 0 14.5,8.0000006 c 0,-1.9064429 -1.665625,-3.4574132 -3.713665,-3.4574132 z m 0,1.3835704 h 5.5721266 a 2.2300415,2.0758598 0 0 1 2.227874,2.0738428 2.2311251,2.0768682 0 0 1 -2.227874,2.0753554 H 5.2142084 A 2.2316666,2.0773724 0 0 1 2.9857915,8.0000006 2.2305835,2.076364 0 0 1 5.2142084,5.9261578 Z m 5.5076676,1.376007 a 0.75020894,0.69834055 0 1 0 0.0017,1.3966802 0.75020894,0.69834055 0 0 0 -0.0017,-1.3966802 z m -5.5065842,0 a 0.75047963,0.69859251 0 1 0 -0.00162,1.3971839 0.75020878,0.69834041 0 0 0 0.00162,-1.3966796 z"
+     id="path4"
+     style="stroke-width:0.999997" />
+  <metadata
+     id="metadata2420">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>micro:bit icon</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+     id="rect2444"
+     width="14"
+     height="14"
+     x="1"
+     y="1"
+     rx="1"
+     ry="1" />
+</svg>

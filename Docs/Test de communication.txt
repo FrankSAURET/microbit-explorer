@@ -1,0 +1,21 @@
+import os
+f=open('main.py','w')
+f.write('coucou')
+f.write('ligne 2')
+f.close()
+
+
+
+"f = open('main.py', 'w')\r\n"
+"f.write(b'from microbit import *\\x0Adisplay.set_pixel(0,3,9)')\r\n"
+"f.close()\r\n"
+
+
+f = open('main.py', 'w')
+f.write('from microbit import * \r\n')
+f.write('display.set_pixel(0,3,9) \r\n')
+f.close()
+
+
+"f = open('main.py', 'w')\r\n"
+"f.close()\r\n"

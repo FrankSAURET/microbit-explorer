@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   role="img"
+   viewBox="0 0 32 32"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="microbitLogoNoir.svg"
+   width="32"
+   height="32"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     id="namedview8"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="14.979167"
+     inkscape:cx="3.4714882"
+     inkscape:cy="18.191933"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6" />
+  <title
+     id="title2">micro:bit icon</title>
+  <path
+     d="M 9.1640961,6.8859045 A 9.1247289,9.1247289 0 0 0 0.0500005,16 9.1233998,9.1233998 0 0 0 9.1640961,25.114096 H 22.837233 A 9.1220706,9.1220706 0 0 0 31.949999,16 c 0,-5.025579 -4.087187,-9.1140956 -9.112766,-9.1140956 z m 0,3.6472335 H 22.837233 A 5.472179,5.472179 0 0 1 28.304095,16 5.4748374,5.4748374 0 0 1 22.837233,21.47085 H 9.1640961 A 5.4761665,5.4761665 0 0 1 3.6959045,16 5.4735082,5.4735082 0 0 1 9.1640961,10.533138 Z m 13.5149659,3.627296 a 1.8408969,1.8408969 0 1 0 0.004,3.681791 1.8408969,1.8408969 0 0 0 -0.004,-3.681791 z m -13.5123076,0 a 1.8415617,1.8415617 0 1 0 -0.00399,3.683121 1.8408973,1.8408973 0 0 0 0.00399,-3.681792 z"
+     id="path4"
+     style="stroke-width:0.999995" />
+  <metadata
+     id="metadata2420">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>micro:bit icon</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>
