@@ -3,7 +3,7 @@
 	"name": "microbit-explorer",
 	"displayName": "microbit-explorer",
 	"description": "Microbit Explorer: Connect, browse, download, delete, upload multiple files",
-	"version": "0.2.0",
+	"version": "0.2.1",
 
 	"author": {
 		"name": "Frank SAURET",
