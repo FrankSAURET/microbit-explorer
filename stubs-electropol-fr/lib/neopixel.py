@@ -5,30 +5,31 @@ from microbit import _Pin
 
 
 class NeoPixel(list):
-    def __init__(self, pin: _Pin, n: int) -> None:
+    def __init__(self, broche: _Pin, n: int) -> None:
         """
-        Create a list representing a strip of 'n' neopixels controlled from
-        the specified pin (e.g. microbit.pin0).
-        Use the resulting object to change each pixel by position (starting
-        from 0).
-        Individual pixels are given RGB (red, green, blue) values between
-        0-255 as a tupe.
-        For example, (255, 255, 255) is white:
-
-            np = neopixel.NeoPixel(microbit.pin0, 8)
+        Crée une liste représentant une bande de 'n' néopixels contrôlés à partir de
+        la broche spécifiée (par exemple microbit.pin0).
+        Utilisez l'objet résultant pour changer chaque pixel en fonction de sa position
+        (en commençant de 0).
+        Les pixels individuels reçoivent des valeurs RVB (rouge, vert, bleu) entre
+        0-255 (tuple).
+        Par exemple :
+            np = neopixel.NeoPixel(microbit.pin0, 3)
             np[0] = (255, 0, 128)
+            np[1] = (255, 255, 0)
+            np[2] = (0, 0, 128)
             np.show()
         """
         pass
 
     def clear(self) -> None:
         """
-        Clear all the pixels.
+        Effacez tous les pixels.
         """
         pass
 
     def show(self) -> None:
         """
-        Show the pixels. Must be called for any updates to become visible.
+        Allume les pixels. Dois être appelé pour que les mises à jour deviennent visibles.
         """
         pass

@@ -2,6 +2,9 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { MicrobitFile, MicrobitFileProvider } from './MicrobitExplorer';
+import { env } from 'vscode';
+import * as path from 'path';
+import * as fs from 'fs';
 
 export var term: vscode.Terminal;
 
@@ -35,14 +38,21 @@ function updatePythonExtraPaths() {
 	//* Chemin des stubs
 	// TODO Revoir ici le __dirname qui est sans doute déprécié
 	// TODO « python.analysis.extraPaths » est-il nécessaire ? (Additional import search resolution paths)
-	let cheminStubMicrobit = __dirname.replace("out", "stubs-electropol-fr\\lib"); // __dirname = Chemin du script en cours
-	let cheminStubMicroPython = __dirname.replace("out", "stubs-electropol-fr\\micropython"); // __dirname = Chemin du script en cours
+	// Change le chemin des stubs en fonction de la langue locale. Si la traduction n'existe pas passe en anglais. Possibilité de forcer la langue à l'anglais dans les paramètres de l'extension.
+	let cheminDeBase = "stubs-electropol-"+ env.language.toLocaleLowerCase();
+	let cheminStubMicrobit = __dirname.replace("out", path.join(cheminDeBase,"lib")); // __dirname = Chemin du script en cours
+	let cheminStubMicroPython = __dirname.replace("out", path.join(cheminDeBase, "micropython")); // __dirname = Chemin du script en cours
+	
+	if (!fs.existsSync(cheminStubMicrobit) || vscode.workspace.getConfiguration().get("microbit.forceStubsEn")){
+		cheminStubMicrobit = __dirname.replace("out", path.join("stubs-electropol-en", "lib")); // __dirname = Chemin du script en cours
+		cheminStubMicroPython = __dirname.replace("out", path.join("stubs-electropol-en", "micropython")); // __dirname = Chemin du script en cours	
+	}
 	// Ne laisse qu'un seul extraPaths qui pointe vers ces stubs
 	//1- autocomplete
 	let extraPathsInitial: String[] = vscode.workspace.getConfiguration().get("python.autoComplete.extraPaths");
 	let extraPathsFinal: String[] = [cheminStubMicrobit, cheminStubMicroPython];
 	for (var i in extraPathsInitial) {
-		if (!extraPathsInitial[i].includes("stubs-electropol-fr")) {
+		if (!extraPathsInitial[i].includes("stubs-electropol")) {
 			extraPathsFinal.push()
 			extraPathsFinal.push(extraPathsInitial[i]);
 		}
@@ -52,7 +62,7 @@ function updatePythonExtraPaths() {
 	extraPathsInitial = vscode.workspace.getConfiguration().get("python.analysis.extraPaths");
 	extraPathsFinal = [cheminStubMicrobit, cheminStubMicroPython];
 	for (var i in extraPathsInitial) {
-		if (!extraPathsInitial[i].includes("stubs-electropol-fr")) {
+		if (!extraPathsInitial[i].includes("stubs-electropol")) {
 			extraPathsFinal.push()
 			extraPathsFinal.push(extraPathsInitial[i]);
 		}

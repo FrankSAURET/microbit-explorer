@@ -117,6 +117,16 @@
 						"description": "Specifies the selected micro:bit COM port."
 					}
 				}
+			},
+			{
+				"title": "microbit",
+				"properties": {
+					"microbit.forceStubsEn": {
+						"type": "boolean",
+						"default": false,
+						"description": "Force the python stub to english."
+					}
+				}
 			}
 		],
 		"commands": [

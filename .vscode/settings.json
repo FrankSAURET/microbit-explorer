@@ -11,5 +11,9 @@
     //"editor.insertSpaces": false, //@vérifier : supprimé par moi pour pb de génération
     "workbench.colorTheme": "Colored Theme (Yellow)",
     "inline-bookmarks.view.showVisibleFilesOnly": false,
+    "i18n-ally.localesPaths": [
+        "H:/OneDrive/4 Programation/- VS Code/Extensions/microbit-explorer/src/locales"
+    ],
+    "commentTranslate.source": "Google",
 
 }
