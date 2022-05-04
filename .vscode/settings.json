@@ -12,5 +12,9 @@
     "workbench.colorTheme": "Colored Theme (Yellow)",
     "inline-bookmarks.view.showVisibleFilesOnly": false,
     "commentTranslate.source": "Google",
+    "i18n-ally.localesPaths": [
+        "locales"
+    ],
+    "i18n-ally.keystyle": "flat",
 
 }

@@ -5,12 +5,16 @@ import { MicrobitFile, MicrobitFileProvider } from './MicrobitExplorer';
 import { env } from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
+import i18n from './i18n';
 
 export var term: vscode.Terminal;
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+
+	i18n.init(context.extensionPath)
+
 	const rootPath = (vscode.workspace.workspaceFolders && (vscode.workspace.workspaceFolders.length > 0))
 		? vscode.workspace.workspaceFolders[0].uri.fsPath : undefined;
 	const microbitFileProvider = new MicrobitFileProvider(rootPath);
