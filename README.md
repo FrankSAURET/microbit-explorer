@@ -27,7 +27,7 @@ Thanks for their work.
 
 
 ## Features
-* Provides stubs for microPython and micro:bit.
+* Provides translated stubs (see below) for microPython and micro:bit.
 * Supports both micro:bit V1 and V2.
 * Quickly send py file to the micro:bit.
 * If wanted, clear all comments and empty line.
@@ -59,6 +59,12 @@ Error message (and other) appear directly in the output console.
 
 https://user-images.githubusercontent.com/1547522/164513525-d6d341de-2d4d-4e49-8d26-67e57ef89f80.mp4
 
+## Translate stubs
+1. Clone repository.
+1. Run "npm install" at root.
+1. Duplicate one of the stubs-electropol-xx folder.
+1. Rename this folder with locales code (https://code.visualstudio.com/docs/getstarted/locales).
+1. Pull request or send me by private message.
 ## Quick links
 
 * [Micro:bit MicroPython](https://microbit-micropython.readthedocs.io/en/v2-docs) 
