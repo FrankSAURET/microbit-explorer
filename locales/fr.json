@@ -1,3 +1,5 @@
 {
-  "MicrobitExplorer.micro-bit-is-now-ready": "Microbit-Explorer est maintenant prêt !"
+  "MicrobitExplorer.micro-bit-is-now-ready": "Microbit-Explorer est maintenant prêt !",
+  "package.micro-bit-upload-current-file-in-main-py-on-micro-bit": "micro:bit - Télécharger le fichier actuel dans main.py sur la micro:bit",
+  "package.suppress-comments-and-empty-lines-when-file-is-sent-to-micro-bit-warning-the-line-number-returned-by-the-error-is-then-false": "Supprime les commentaires et les lignes vides lorsque le fichier est envoyé à la micro:bit. \nAttention : le numéro de ligne renvoyé par l'erreur est alors faux."
 }

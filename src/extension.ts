@@ -14,11 +14,10 @@ export var term: vscode.Terminal;
 export function activate(context: vscode.ExtensionContext) {
 
 	i18n.init(context.extensionPath)
-
 	const rootPath = (vscode.workspace.workspaceFolders && (vscode.workspace.workspaceFolders.length > 0))
 		? vscode.workspace.workspaceFolders[0].uri.fsPath : undefined;
 	const microbitFileProvider = new MicrobitFileProvider(rootPath);
-	updatePythonExtraPaths();
+	updatePythonExtraPaths(context.extensionPath);
 	
 	vscode.window.registerTreeDataProvider('microbit-explorer-view', microbitFileProvider);
 	//#region registerCommand
@@ -38,19 +37,19 @@ export function activate(context: vscode.ExtensionContext) {
 	
 	//#endregion
 }
-function updatePythonExtraPaths() {
+function updatePythonExtraPaths(cheminExtension:string) {
 	//* Chemin des stubs
 	// TODO Revoir ici le __dirname qui est sans doute déprécié
 	// TODO « python.analysis.extraPaths » est-il nécessaire ? (Additional import search resolution paths)
 	// Change le chemin des stubs en fonction de la langue locale. Si la traduction n'existe pas passe en anglais. Possibilité de forcer la langue à l'anglais dans les paramètres de l'extension.
-	let cheminDeBase = "stubs-electropol-"+ env.language.toLocaleLowerCase();
-	let cheminStubMicrobit = __dirname.replace("out", path.join(cheminDeBase,"lib")); // __dirname = Chemin du script en cours
-	let cheminStubMicroPython = __dirname.replace("out", path.join(cheminDeBase, "micropython")); // __dirname = Chemin du script en cours
 	
-	if (!fs.existsSync(cheminStubMicrobit) || vscode.workspace.getConfiguration().get("microbit.forceStubsEn")){
-		cheminStubMicrobit = __dirname.replace("out", path.join("stubs-electropol-en", "lib")); // __dirname = Chemin du script en cours
-		cheminStubMicroPython = __dirname.replace("out", path.join("stubs-electropol-en", "micropython")); // __dirname = Chemin du script en cours	
+	let cheminStub = "stubs-electropol-"+ env.language.toLocaleLowerCase();
+	if (!fs.existsSync(path.join(cheminExtension, cheminStub)) || vscode.workspace.getConfiguration().get("microbit.forceStubsEn")){
+		cheminStub = "stubs-electropol-en";
 	}
+	let cheminStubMicrobit = path.join(cheminExtension, cheminStub, "lib"); // __dirname = Chemin du script en cours
+	let cheminStubMicroPython = path.join(cheminExtension, cheminStub, "micropython"); // __dirname = Chemin du script en cours
+
 	// Ne laisse qu'un seul extraPaths qui pointe vers ces stubs
 	//1- autocomplete
 	let extraPathsInitial: String[] = vscode.workspace.getConfiguration().get("python.autoComplete.extraPaths");
