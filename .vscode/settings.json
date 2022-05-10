@@ -1,45 +1,6 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-    "files.exclude": {
-        "out": false // set this to true to hide the "out" folder with the compiled JS files
-    },
-    "search.exclude": {
-        "out": true // set this to false to include "out" folder in search results
-    },
-    //"typescript.tsdk": "./node_modules/typescript/lib", // we want to use the TS server from our node_modules folder to control its version //@vérifier : supprimé par moi pour pb de génération
-    "typescript.tsc.autoDetect": "off",
-    //"editor.insertSpaces": false, //@vérifier : supprimé par moi pour pb de génération
-    "workbench.colorTheme": "Colored Theme (Yellow)",
-    "inline-bookmarks.view.showVisibleFilesOnly": false,
     "commentTranslate.source": "Google",
-    // i18n
-    "i18n-ally.localesPaths": "./locales",
-    "i18n-ally.sourceLanguage": "en",
-    "i18n-ally.keystyle": "flat",
-    "i18n-ally.preferredDelimiter": "_",
-    "i18n-ally.sortKeys": true,
-    "i18n-ally.keepFulfilled": true,
-    "i18n-ally.translate.promptSource": true,
-    "i18n-ally.pathMatcher": "{locale}.json",
-    "i18n-ally.translate.saveAsCandidates": true,
-    "i18n-ally.keysInUse": [
-        "view.progress_submenu.translated_keys",
-        "view.progress_submenu.missing_keys",
-        "view.progress_submenu.empty_keys"
-    ],
-    "i18n-ally.usage.scanningIgnore": [
-        "examples",
-    ],
-    "i18n-ally.regex.usageMatchAppend": [
-        "/\\*\\s*i18n\\s*\\*/\\s*['\"`]({key})['\"`]"
-    ],
-    "i18n-ally.enabledFrameworks": [
-        "vscode",
-        "vue",
-        "general"
-    ],
-    "i18n-ally.theme.annotationMissingBorder": "#d37070",
-    "i18n-ally.theme.annotationMissing": "#d37070",
     "eslint.validate": [
         "javascript",
         "typescript",
@@ -47,5 +8,44 @@
         "typescriptreact",
         "vue",
         "html"
-    ]
+    ],
+    "files.exclude": {
+        "out": false // set this to true to hide the "out" folder with the compiled JS files
+    },
+    "i18n-ally.enabledFrameworks": [
+        "vscode",
+        "vue",
+        "general"
+    ],
+    "i18n-ally.keepFulfilled": true,
+    "i18n-ally.keysInUse": [
+        "view.progress_submenu.translated_keys",
+        "view.progress_submenu.missing_keys",
+        "view.progress_submenu.empty_keys"
+    ],
+    "i18n-ally.keystyle": "flat",
+    // i18n
+    "i18n-ally.localesPaths": "./locales",
+    "i18n-ally.pathMatcher": "{locale}.json",
+    "i18n-ally.preferredDelimiter": "_",
+    "i18n-ally.regex.usageMatchAppend": [
+        "/\\*\\s*i18n\\s*\\*/\\s*['\"`]({key})['\"`]"
+    ],
+    "i18n-ally.sortKeys": true,
+    "i18n-ally.sourceLanguage": "en",
+    "i18n-ally.theme.annotationMissing": "#0100CC",
+    "i18n-ally.theme.annotationMissingBorder": "#FF0000",
+    "i18n-ally.translate.promptSource": true,
+    "i18n-ally.translate.saveAsCandidates": true,
+    "i18n-ally.usage.scanningIgnore": [
+        "examples"
+    ],
+    "inline-bookmarks.view.showVisibleFilesOnly": false,
+    "search.exclude": {
+        "out": true // set this to false to include "out" folder in search results
+    },
+    //"typescript.tsdk": "./node_modules/typescript/lib", // we want to use the TS server from our node_modules folder to control its version //@vérifier : supprimé par moi pour pb de génération
+    "typescript.tsc.autoDetect": "off",
+    //"editor.insertSpaces": false, //@vérifier : supprimé par moi pour pb de génération
+    "workbench.colorTheme": "Colored Theme (Yellow)"
 }

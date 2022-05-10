@@ -94,7 +94,7 @@
 					"microbit.clearComments": {
 						"type": "boolean",
 						"default": false,
-						"description": "Suppress comments and empty lines when file is sent to micro:bit. Warning : the line number returned by the error is then false."
+						"description": "%package.suppress_comments_and_empty_lines_when_file_is_sent_to_micro_bit_warning_the_line_number_returned_by_the_error_is_then_false%"
 					}
 				}
 			},
@@ -104,7 +104,7 @@
 					"microbit.forceSave": {
 						"type": "boolean",
 						"default": true,
-						"description": "Forces saving the file before uploading it to the microbit."
+						"description": "%package.forces_saving_the_file_before_uploading_it_to_the_microbit%"
 					}
 				}
 			},
@@ -114,7 +114,7 @@
 					"microbit.comPort": {
 						"type": "string",
 						"default": null,
-						"description": "Specifies the selected micro:bit COM port."
+						"description": "%package.specifies_the_selected_micro_bit_com_port%"
 					}
 				}
 			},
@@ -124,7 +124,7 @@
 					"microbit.forceStubsEn": {
 						"type": "boolean",
 						"default": false,
-						"description": "Force the python stub to english."
+						"description": "%package.force_the_python_stub_to_english%"
 					}
 				}
 			}
@@ -132,7 +132,7 @@
 		"commands": [
 			{
 				"command": "microbit.sendFileToMicrobitMain",
-				"title": "micro:bit - Upload current file in main.py on micro:bit",
+				"title": "%package.micro_bit_-_upload_current_file_in_main_py_on_micro_bit%",
 				"icon": {
 					"dark": "image/microbitUpload16.svg",
 					"light": "image/microbitUpload16.svg"
@@ -140,15 +140,15 @@
 			},
 			{
 				"command": "microbit.sendFileToMicrobit",
-				"title": "⤵️ micro:bit - Send this file to micro:bit"
+				"title": "%package.micro_bit_-_send_this_file_to_micro_bit%"
 			},
 			{
 				"command": "microbit.sendCleanedFileToMicrobit",
-				"title": "⬇️ micro:bit - Send this file - without comment and empty lines - to micro:bit"
+				"title": "%package.micro_bit_-_send_this_file_-_without_comment_and_empty_lines_-_to_micro_bit%"
 			},
 			{
 				"command": "microbit.refreshEntry",
-				"title": "Refresh content from micro:bit",
+				"title": "%package.refresh_content_from_micro_bit%",
 				"icon": {
 					"light": "image/light/refresh.svg",
 					"dark": "image/dark/refresh.svg"
@@ -156,7 +156,7 @@
 			},
 			{
 				"command": "microbit.uploadEntry",
-				"title": "Upload all files to micro:bit",
+				"title": "%package.upload_all_files_to_micro_bit%",
 				"icon": {
 					"light": "image/light/upload.svg",
 					"dark": "image/dark/upload.svg"
@@ -164,7 +164,7 @@
 			},
 			{
 				"command": "microbit.downloadEntry",
-				"title": "Download all files from micro:bit",
+				"title": "%package.download_all_files_from_micro_bit%",
 				"icon": {
 					"light": "image/light/download.svg",
 					"dark": "image/dark/download.svg"
@@ -172,7 +172,7 @@
 			},
 			{
 				"command": "microbit.deleteEntry",
-				"title": "❌ Delete this file on micro:bit",
+				"title": "%package.delete_this_file_on_micro_bit%",
 				"icon": {
 					"dark": "image/trash16.svg",
 					"light": "image/trash16.svg"
@@ -180,7 +180,7 @@
 			},
 			{
 				"command": "microbit.downloadThisFile",
-				"title": "⤴️ Download this file from micro:bit",
+				"title": "%package.download_this_file_from_micro_bit%",
 				"icon": {
 					"dark": "image/microbitDownload16.svg",
 					"light": "image/microbitDownload16.svg"
@@ -188,7 +188,7 @@
 			},
 			{
 				"command": "microbit.resetEntry",
-				"title": "Reset micro:bit",
+				"title": "%package.reset_micro_bit%",
 				"icon": {
 					"light": "image/light/shutdown.svg",
 					"dark": "image/dark/shutdown.svg"
@@ -196,7 +196,7 @@
 			},
 			{
 				"command": "microbit.disconnectEntry",
-				"title": "Disconnect",
+				"title": "%package.disconnect%",
 				"icon": {
 					"light": "image/light/disconnect.svg",
 					"dark": "image/dark/disconnect.svg"
@@ -264,13 +264,13 @@
 		"viewsWelcome": [
 			{
 				"view": "microbit-explorer-view",
-				"contents": "Plug in a micro:bit card and click below to view its contents, download or delete files.\n[Connect to micro:bit](command:microbit.connectEntry)"
+				"contents": "%package.plug_in_a_micro_bit_card_and_click_below_to_view_its_contents_download_or_delete_files_n_connect_to_micro_bit_command_microbit_connectentry%"
 			}
 		],
 		"keybindings": [
 			{
 				"command": "microbit.sendFileToMicrobitMain",
-				"key": "ctrl+alt+u"
+				"key": "%package.ctrl_alt_u%"
 			},
 			{
 				"command": "notifications.showList",
