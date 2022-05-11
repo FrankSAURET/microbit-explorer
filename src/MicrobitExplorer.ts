@@ -75,7 +75,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 	}
 	getChildren(element?: MicrobitFile): Thenable<MicrobitFile[]> {
 		if (typeof this.serialPort === "undefined" || !this.serialPort.isOpen) {
-			console.log("micro:bit isn't connected");
+			console.log("i18n.t('MicrobitExplorer.micro_bit_isnt_connected')");
 			return Promise.resolve([]);
 		}
 		if (!this.workspaceRoot) {
@@ -162,7 +162,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 	
 	public async DisconnectDevice(): Promise<void> {
 		if (typeof this.serialPort === "undefined" || !this.serialPort.isOpen) {
-			console.log("micro:bit isn't connected");
+			console.log("i18n.t('MicrobitExplorer.micro_bit_isnt_connected')");
 			return;
 		}
 		this.serialPort.close();
@@ -181,16 +181,16 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 		await this.StopRunning();
 
 		for (const element of this.files) {
-			console.log("Begin read " + element.filename)
+			console.log("i18n.t('MicrobitExplorer.begin_read')" + element.filename)
 			await this.DownloadFile(element.filename, path.join(this.workspaceRoot, element.filename))
-			console.log("End read " + element.filename)
+			console.log("i18n.t('MicrobitExplorer.end_read')" + element.filename)
 
 		}
 		vscode.window.showInformationMessage(i18n.t('MicrobitExplorer.downloaded_all_file'));
 	}
 	public async deleteFile(node: MicrobitFile): Promise<void> {
 		if (typeof this.serialPort === "undefined" || !this.serialPort.isOpen) {
-			vscode.window.showInformationMessage("micro:bit isn't connected");
+			vscode.window.showInformationMessage("i18n.t('MicrobitExplorer.micro_bit_isnt_connected')");
 			return;
 		}
 
@@ -203,11 +203,11 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 	public async Connect(): Promise<void> {
 		this.MicroBitOutput.clear();
 		if (!this.workspaceRoot) {
-			vscode.window.showWarningMessage('Please open folder or workspace');
+			vscode.window.showWarningMessage('i18n.t('MicrobitExplorer.please_open_folder_or_workspace')');
 			return
 		}
 		if (!this.microbitPrete) {
-			vscode.window.showWarningMessage('Wait a minute please !');
+			vscode.window.showWarningMessage('i18n.t('MicrobitExplorer.wait_a_minute_please')');
 			return
 		}
 
@@ -216,17 +216,17 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 				async ports => {
 					for (const index in ports) {
 						if (ports[index].productId === "0204" && ports[index].vendorId === "0D28") {
-							console.log("Try connect");
+							console.log("i18n.t('MicrobitExplorer.try_connect')");
 							if (await this.ConnectToMicrobit(ports[index].path) == true) {
 								return;
 							}
 						}
 					}
-					console.log("Done");
-					vscode.window.showWarningMessage("Don't find any micro:bit");
+					console.log("i18n.t('MicrobitExplorer.done')");
+					vscode.window.showWarningMessage("i18n.t('MicrobitExplorer.dont_find_any_micro_bit')");
 				},
 				err => {
-					vscode.window.showWarningMessage("Don't find any micro:bit");
+					vscode.window.showWarningMessage("i18n.t('MicrobitExplorer.dont_find_any_micro_bit')");
 				}
 
 			);
@@ -246,7 +246,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 	async downloadThisFile(node: MicrobitFile): Promise<void> {
 		//@note downLoadThisFile
 		if (typeof this.serialPort === "undefined" || !this.serialPort.isOpen) {
-			vscode.window.showInformationMessage("micro:bit isn't connected");
+			vscode.window.showInformationMessage("i18n.t('MicrobitExplorer.micro_bit_isnt_connected')");
 			return;
 		}
 		await this.StopRunning();
@@ -258,9 +258,11 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 				await this.DownloadFile(node.filename, targetFile);
 				await commands.executeCommand('vscode.open', Uri.file(targetFile)); }
 			else {
-				let oui = 'oui';
-				let non = 'non';
-				vscode.window.showInformationMessage("Attention le fichier " + node.filename + " existe. Voulez-vous l'écraser", oui, non).
+				let oui = 'i18n.t('MicrobitExplorer.yes')';
+				let non = 'i18n.t('MicrobitExplorer.no')';
+				let nomFichier = node.filename;
+
+				vscode.window.showInformationMessage(`i18n.t('MicrobitExplorer.warning_file_nomfichier_already_exists_do_you_want_to_overwrite_it')`, oui, non).
 					then(async selection => {
 						await this.DownloadFile(node.filename, targetFile);
 						await commands.executeCommand('vscode.open', Uri.file(targetFile));
@@ -279,15 +281,15 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 			await this.SendAndRecv("f = open('" + target + "', 'w')\r\n", false);
 			result = await this.SendAndRecv("f.write(b'" + fichierDeSortie.join("\\x0A") + "')\r\n", false, 1000);
 			let NombreDeCaractere = parseInt(result, 10);
-			if (isNaN(NombreDeCaractere)) throw new Error("Ce n'est pas un nombre !");
+			if (isNaN(NombreDeCaractere)) throw new Error("i18n.t('MicrobitExplorer.this_is_not_a_number')");
 			await this.SendAndRecv("f.close()\r\n", false);
-			this.MicroBitOutput.appendLine(`File « ${fileShort} » is now on micro:bit « ${target} » on ${this.serialPort.path}`);
-			if (clearComments) { this.MicroBitOutput.appendLine("All comments and blank lines have been removed.")}
+			this.MicroBitOutput.appendLine(`i18n.t('MicrobitExplorer.file_fileshort_is_now_on_micro_bit_target_on_this_serialport_path')`);
+			if (clearComments) { this.MicroBitOutput.appendLine("i18n.t('MicrobitExplorer.all_comments_and_blank_lines_have_been_removed')")}
 		}
 		catch (e) {
 			result = await this.SendAndRecv("f.close()\r\n", false);
 			//this.MicroBitOutput.appendLine("277" + result);
-			this.MicroBitOutput.appendLine(`Error: Unable to send « ${fileShort} » to micro:bit.`);
+			this.MicroBitOutput.appendLine(`i18n.t('MicrobitExplorer.error_unable_to_send_fileshort_to_micro_bit')`);
 		}
 	}
 	async traiteFichier(file, clearComments): Promise<string[]> {
@@ -414,10 +416,10 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 	}
 	private async ConnectToMicrobit(serialpath: string): Promise<boolean> {
 		if (this.serialPort && this.serialPort.isOpen) {
-			console.log('Device is connected and trying to list files');
+			console.log('i18n.t('MicrobitExplorer.micro_bit_is_connected_and_trying_to_list_files')');
 			return;
 		}
-		console.log('Connecting to ' + serialpath);
+		console.log(`i18n.t('MicrobitExplorer.connecting_to_serialpath')`);
 		this.serialPort = new SerialPort({ path: serialpath, baudRate: 115200 });
 		this.serialPort.on('readable', this.OnRecvData.bind(this));
 		this.serialPort.on('close', function () { this.DisconnectDevice(); }.bind(this));
@@ -426,11 +428,11 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 
 		if (result == null) {
 			this.serialPort.close();
-			vscode.window.showErrorMessage('Cannot connect to ' + serialpath);
+			vscode.window.showErrorMessage(`i18n.t('MicrobitExplorer.cannot_connect_to_serialpath')`);
 			return false;
 		}
 		else {
-			vscode.window.showInformationMessage('micro:bit is connected to ' + serialpath);
+			vscode.window.showInformationMessage(`i18n.t('MicrobitExplorer.micro_bit_is_connected_to_serialpath')`);
 			this.refresh();
 			return true;
 		}
