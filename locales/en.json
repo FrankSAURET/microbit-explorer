@@ -17,7 +17,6 @@
   "MicrobitExplorer.micro_bit_reset_done": "micro:bit reset done",
   "MicrobitExplorer.no": "no",
   "MicrobitExplorer.no_dependency_in_empty_workspace": "No dependency in empty workspace",
-  "MicrobitExplorer.no_dependency_in_empty_workspace_0": "No dependency in empty workspace",
   "MicrobitExplorer.not_yet_implemented": "Not yet implemented!",
   "MicrobitExplorer.please_open_folder_or_workspace": "Please open folder or workspace",
   "MicrobitExplorer.reset_device": "Reset micro:bit",
