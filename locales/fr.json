@@ -18,7 +18,7 @@
   "MicrobitExplorer.no": "non",
   "MicrobitExplorer.no_dependency_in_empty_workspace": "Ouvrez un dossier et créez un fichier « .py » !",
   "MicrobitExplorer.not_yet_implemented": "Pas encore implémenté!",
-  "MicrobitExplorer.please_open_folder_or_workspace": "Veuillez ouvrir le dossier ou l'espace de travail",
+  "MicrobitExplorer.please_open_folder_or_workspace": "Veuillez ouvrir un dossier ou un espace de travail",
   "MicrobitExplorer.reset_device": "Réinitialiser la micro:bit",
   "MicrobitExplorer.selected_file_must_be_a_py_file": "Le fichier sélectionné doit être un fichier « .py » !",
   "MicrobitExplorer.this_is_not_a_number": "Ceci n'est pas un nombre !",

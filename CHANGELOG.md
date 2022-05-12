@@ -1,7 +1,9 @@
 # Change Log
+## [0.2.2] - mai 2022
+* Traduction de l'interface en français.
 ## [0.2.1] - 24 avril 2022
 * Change le chemin des stubs en fonction de la langue locale. Si la traduction n'existe pas, passe en anglais. Possibilité de forcer la langue à l'anglais dans les paramètres de l'extension.
-* Début de la traduction  des stubs python en  français (microbit et neopixel seulement).
+* Début de la traduction  des commentaires micropython en  français (microbit et neopixel seulement).
 ## [0.2.0] - 21 avril 2022
 * Réinsertion de microbit explorer.
 * Microbit-fr et microbit-explorer seront désormais une seul extension que je relocaliserais sur le repo de microbit-explorer.
