@@ -13,7 +13,5 @@
 		"node_modules",
 		".vscode-test"
 	],
-	"include": [
-		"./package.nls.*.json"
-	],
+
 }

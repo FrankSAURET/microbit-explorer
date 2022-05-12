@@ -89,7 +89,7 @@
 		},
 		"configuration": [
 			{
-				"title": "microbit",
+				"title": "Microbit-Explorer",
 				"properties": {
 					"microbit.clearComments": {
 						"type": "boolean",
@@ -99,7 +99,7 @@
 				}
 			},
 			{
-				"title": "microbit",
+				"title": "Microbit-Explorer",
 				"properties": {
 					"microbit.forceSave": {
 						"type": "boolean",
@@ -109,7 +109,7 @@
 				}
 			},
 			{
-				"title": "microbit",
+				"title": "Microbit-Explorer",
 				"properties": {
 					"microbit.comPort": {
 						"type": "string",
@@ -119,7 +119,7 @@
 				}
 			},
 			{
-				"title": "microbit",
+				"title": "Microbit-Explorer",
 				"properties": {
 					"microbit.forceStubsEn": {
 						"type": "boolean",
