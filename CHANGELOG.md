@@ -31,5 +31,6 @@
 * Colorer la vue microbit.
 * Mettre des icônes dans le texte pour augmenter la lisibilité.
 * Ajouter la mise à jour du firmware.
+* Garder des lignes vides lors de la suppression des commentaires et mettre cet envoie par défaut.
 
 
