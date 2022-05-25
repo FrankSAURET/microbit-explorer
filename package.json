@@ -279,6 +279,7 @@
 		]
 	},
 	"scripts": {
+		"prepare": "src/scripts/createPackageNLS.ts",
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",

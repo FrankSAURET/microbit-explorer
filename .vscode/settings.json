@@ -12,6 +12,7 @@
     "files.exclude": {
         "out": false // set this to true to hide the "out" folder with the compiled JS files
     },
+    // i18n
     "i18n-ally.enabledFrameworks": [
         "vscode",
         "vue",
@@ -24,8 +25,7 @@
         "view.progress_submenu.empty_keys"
     ],
     "i18n-ally.keystyle": "flat",
-    // i18n
-    "i18n-ally.localesPaths": "./locales",
+    "i18n-ally.localesPaths": "./src/locales",
     "i18n-ally.pathMatcher": "{locale}.json",
     "i18n-ally.preferredDelimiter": "_",
     "i18n-ally.regex.usageMatchAppend": [
