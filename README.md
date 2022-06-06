@@ -17,7 +17,7 @@ And also on:
 Thanks for their work.
 <p align="center">
 <a href="https://marketplace.visualstudio.com/items?itemName=electropol-fr.microbit-explorer"><img src="https://badgen.net/vs-marketplace/v/electropol-fr.microbit-explorer?icon=visualstudio" alt="vs-marketplace version"></a>
-<a href="https://github.com/FrankSAURET/microbit-explorer"><img src="https://badgen.net/github/last-commit/FrankSAURET/microbit-explorer?icon=github" alt="Github last commit"></a>
+<a href="https://github.com/FrankSAURET/microbit-explorer"><img src="https://img.shields.io/github/last-commit/FrankSAURET/microbit-explorer?logo=GitHub&style=plastic" alt="lien github"></a>
 <img src="https://badgen.net/vs-marketplace/i/electropol-fr.microbit-explorer" alt="vs-marketplace installs">
 <img src="https://badgen.net/vs-marketplace/d/electropol-fr.microbit-explorer?color=cyan" alt="vs-marketplace downloads">
 <img src="https://badgen.net/vs-marketplace/rating/electropol-fr.microbit-explorer" alt="vs-marketplace rating">
@@ -72,7 +72,7 @@ https://user-images.githubusercontent.com/1547522/164513525-d6d341de-2d4d-4e49-8
 1. Duplicate the file with local code you understand (in src\locales).
 1. Rename it with locales code (https://code.visualstudio.com/docs/getstarted/.
 1. Pull request or send me by private message.
-1. If you want to test, copy the file in root folder and rename it lik package.nls.XX.json where XX is the local code.
+1. If you want to test, copy the file in root folder and rename like package.nls.XX.json where XX is the local code.
 ## Quick links
 
 * [Micro:bit MicroPython](https://microbit-micropython.readthedocs.io/en/v2-docs) 

@@ -1,5 +1,5 @@
 # Change Log
-## [0.2.2] - 06 juin 2022
+## [0.2.3] - 06 juin 2022
 * Traduction de l'interface en français.
 * Ajoût d'icônes dans le texte pour augmenter la lisibilité.
 ## [0.2.1] - 24 avril 2022
@@ -16,8 +16,8 @@
 * Le retour d'erreur s'affiche dans la console de sortie.
 * Ajout des stubs pour micropython.
 ## [0.0.1] - 17 février 2022
-- Stubs fonctionnels.
-- Chargement rapide dans le main.py.
+* Stubs fonctionnels.
+* Chargement rapide dans le main.py.
 # Todo
 * ??? Implémenter le flashage ???. Voir ce que ça apporte notamment, est-il possible de compiler un hex avec plusieurs modules et de l'envoyer. voir si ça produit un fichier minimaliste.
 * Implémenter la simulation.
