@@ -3,7 +3,7 @@
 	"name": "microbit-explorer",
 	"displayName": "microbit-explorer",
 	"description": "Microbit Explorer: Connect, browse, download, delete, upload multiple files",
-	"version": "0.2.1",
+	"version": "0.2.2",
 
 	"author": {
 		"name": "Frank SAURET",
@@ -279,7 +279,6 @@
 		]
 	},
 	"scripts": {
-		"build": "src/scripts/createPackageNLS.ts",
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",

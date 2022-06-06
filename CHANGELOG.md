@@ -1,6 +1,7 @@
 # Change Log
-## [0.2.2] - mai 2022
+## [0.2.2] - 06 juin 2022
 * Traduction de l'interface en français.
+* Ajoût d'icônes dans le texte pour augmenter la lisibilité.
 ## [0.2.1] - 24 avril 2022
 * Change le chemin des stubs en fonction de la langue locale. Si la traduction n'existe pas, passe en anglais. Possibilité de forcer la langue à l'anglais dans les paramètres de l'extension.
 * Début de la traduction  des commentaires micropython en  français (microbit et neopixel seulement).
@@ -18,7 +19,6 @@
 - Stubs fonctionnels.
 - Chargement rapide dans le main.py.
 # Todo
-* Traduire en français.
 * ??? Implémenter le flashage ???. Voir ce que ça apporte notamment, est-il possible de compiler un hex avec plusieurs modules et de l'envoyer. voir si ça produit un fichier minimaliste.
 * Implémenter la simulation.
 * Afficher les icônes seulement si on est sur un fichier microbit (qui contient from microbit import * ou import microbit). Créer un langage ? https://code.visualstudio.com/api/references/contribution-points#contributes.languages 

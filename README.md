@@ -59,12 +59,20 @@ Error message (and other) appear directly in the output console.
 
 https://user-images.githubusercontent.com/1547522/164513525-d6d341de-2d4d-4e49-8d26-67e57ef89f80.mp4
 
-## Translate stubs
+## Translate 
 1. Clone repository.
 1. Run "npm install" at root.
+### stubs
+
 1. Duplicate one of the stubs-electropol-xx folder.
 1. Rename this folder with locales code (https://code.visualstudio.com/docs/getstarted/locales).
 1. Pull request or send me by private message.
+### Interface
+1. You can use "i18n ally" extension as recommended.
+1. Duplicate the file with local code you understand (in src\locales).
+1. Rename it with locales code (https://code.visualstudio.com/docs/getstarted/.
+1. Pull request or send me by private message.
+1. If you want to test, copy the file in root folder and rename it lik package.nls.XX.json where XX is the local code.
 ## Quick links
 
 * [Micro:bit MicroPython](https://microbit-micropython.readthedocs.io/en/v2-docs) 
