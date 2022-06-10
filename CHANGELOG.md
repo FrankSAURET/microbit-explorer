@@ -1,4 +1,8 @@
 # Change Log
+## [0.2.4] -  2022
+* Fait maintenant une vérfification de la connexion avant d'afficher microbit pret.
+* Permet maintenant la mise à jour du firmware.
+* Affiche "Pas de fichier" si la microbit est vide.
 ## [0.2.3] - 06 juin 2022
 * Traduction de l'interface en français.
 * Ajoût d'icônes dans le texte pour augmenter la lisibilité.
@@ -26,11 +30,10 @@
 * nettoyer les trucs inutiles.
 * Faire un pas à pas.
 * coloriser le retour d'erreur et faire un lien avec le programme local.
-* Ajouter une fonctionnalité de renomage dans l'explorateur.
+* ???Ajouter une fonctionnalité de renomage dans l'explorateur.???
 * Implémenter le glisser déposer pour upload et download.
 * Colorer la vue microbit.
-* Mettre des icônes dans le texte pour augmenter la lisibilité.
-* Ajouter la mise à jour du firmware.
-* Garder des lignes vides lors de la suppression des commentaires et mettre cet envoie par défaut.
+* Propose une option permettant de Garder des lignes vides lors de la suppression des commentaires et mettre cet envoie par défaut (Supprimer lignes vides et commentaires/Supprimer les commentaires/Garder tout).
+*??? Déplacement du bouton "télécharger tous les fichier" dans l'explorateur PC.???
 
 
