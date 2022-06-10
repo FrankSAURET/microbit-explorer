@@ -4,7 +4,6 @@
 	"displayName": "microbit-explorer",
 	"description": "Microbit Explorer: Connect, browse, download, delete, upload multiple files",
 	"version": "0.2.3",
-
 	"author": {
 		"name": "Frank SAURET",
 		"email": "frank.sauret.prof@gmail.com",
@@ -201,34 +200,47 @@
 					"light": "image/light/disconnect.svg",
 					"dark": "image/dark/disconnect.svg"
 				}
+			},
+			{
+				"command": "microbit.updateFirmware",
+				"title": "%package.update_or_reinstall_firmware%",
+				"icon": {
+					"light": "image/light/update16.svg",
+					"dark": "image/dark/update16.svg"
+				}
 			}
 		],
 		"menus": {
 			"view/title": [
 				{
-					"command": "microbit.disconnectEntry",
+					"command": "microbit.updateFirmware",
 					"when": "view == microbit-explorer-view",
 					"group": "navigation@0"
 				},
 				{
-					"command": "microbit.resetEntry",
+					"command": "microbit.disconnectEntry",
 					"when": "view == microbit-explorer-view",
 					"group": "navigation@1"
 				},
 				{
-					"command": "microbit.downloadEntry",
+					"command": "microbit.resetEntry",
 					"when": "view == microbit-explorer-view",
 					"group": "navigation@2"
 				},
 				{
-					"command": "microbit.uploadEntry",
+					"command": "microbit.downloadEntry",
 					"when": "view == microbit-explorer-view",
 					"group": "navigation@3"
 				},
 				{
-					"command": "microbit.refreshEntry",
+					"command": "microbit.uploadEntry",
 					"when": "view == microbit-explorer-view",
 					"group": "navigation@4"
+				},
+				{
+					"command": "microbit.refreshEntry",
+					"when": "view == microbit-explorer-view",
+					"group": "navigation@5"
 				}
 			],
 			"view/item/context": [
@@ -252,7 +264,7 @@
 				{
 					"command": "microbit.sendFileToMicrobit",
 					"when": "resourceScheme == file && resourceExtname == .py",
-					"group": "microbit@1"
+					"group": "microbit@0"
 				},
 				{
 					"command": "microbit.sendCleanedFileToMicrobit",

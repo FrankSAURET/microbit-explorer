@@ -34,8 +34,127 @@ export function activate(context: vscode.ExtensionContext) {
 	vscode.commands.registerCommand('microbit.connectEntry', () => microbitFileProvider.Connect());
 	vscode.commands.registerCommand('microbit.resetEntry', () => microbitFileProvider.ResetMicroBit());
 	vscode.commands.registerCommand('microbit.disconnectEntry', () => microbitFileProvider.DisconnectDevice());
+	vscode.commands.registerCommand('microbit.updateFirmware', () => updateFirmware());
 	
 	//#endregion
+	async function updateFirmware() {
+		try {
+			await findPipLocation();
+			let dir = "";
+			await installModule(dir, "uflash");
+			await flashMicrobit("", "");
+			await microbitFileProvider.UploadEmptyFile();
+			await microbitFileProvider.refresh();
+		} catch (error) {
+			console.log(error);
+		}
+	}
+	async function findPipLocation() {
+		//Vérifie que pip est installé et retourne sa version et son chemin ou génère une erreur
+		const { spawn } = require('child_process');
+		const child = spawn('pip', ['-V']);
+
+		try {
+			let data = "";
+			for await (const chunk of child.stdout) {
+				console.log('stdout: ' + chunk);
+				data += chunk;
+			}
+			let error = "";
+			for await (const chunk of child.stderr) {
+				console.error('stderr: ' + chunk);
+				error += chunk;
+			}
+			const exitCode = await new Promise((resolve, reject) => {
+				child.on('close', resolve);
+				let path = "";
+				path = data.substring(
+					data.lastIndexOf(":") - 1,
+					data.lastIndexOf("pip")
+				);
+				console.log("Python third-party dir: " + path);
+				vscode.workspace.getConfiguration("python").update("thirdPartyModulesDirectory", path, vscode.ConfigurationTarget.Global);
+			});
+			if (exitCode) {
+				throw new Error(`subprocess error exit ${exitCode}, ${error}`);
+			}
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+	async function installModule(target: string, module: string) {
+		// Installe un module avec pip et retourne le message post installation
+		const { spawn } = require('child_process');
+		const args = "pip install " + target + " " + module;
+		const child = spawn("powershell.exe", [args]);
+
+		try {
+			let data = "";
+			for await (const chunk of child.stdout) {
+				console.log('stdout: ' + chunk);
+				data += chunk;
+				console.log(`Module ${module} succesfully installed,${module}`);
+			}
+			let error = "";
+			for await (const chunk of child.stderr) {
+				console.error('stderr: ' + chunk);
+				error += chunk;
+				vscode.window.showErrorMessage(error);
+			}
+			const exitCode = await new Promise((resolve, reject) => {
+				child.on('close', resolve);
+			});
+			if (exitCode) {
+				throw new Error(`subprocess error exit ${exitCode}, ${error}`);
+			}
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+	async function flashMicrobit(fichier: string, destination: string) {
+		// flash un fichier sur une ou plusieurs microbit. S'il y a plusieurs destination les chemins doivent être séparés par une espace
+		// https://github.com/ntoll/uflash
+
+		const { spawn } = require('child_process');
+		const args = "uflash " + fichier + " " + destination;
+		const child = spawn("powershell.exe", [args]);
+
+		try {
+			vscode.window.showInformationMessage(i18n.t('extension.its_a_long_operation_wait_for_the_end_of_process_information_bottom_right_of_the_screen_to_continue'))
+			microbitFileProvider.MicroBitOutput.appendLine(i18n.t('extension.its_a_long_operation_wait_for_the_end_of_process_information_bottom_right_of_the_screen_to_continue'));
+			microbitFileProvider.MicroBitOutput.show(true);//ne prend pas le focus
+			let data = "";
+			for await (const chunk of child.stdout) {
+				console.log('stdout: ' + chunk);
+				data += chunk;
+				if (fichier != "") {
+					vscode.window.showInformationMessage(`${fichier} send to ${destination}, ${fichier} ${destination}`);
+				}
+				else {
+					vscode.window.showInformationMessage(i18n.t('extension.firmware_correctly_send'));
+					microbitFileProvider.MicroBitOutput.appendLine(i18n.t('extension.firmware_correctly_send'));
+					microbitFileProvider.MicroBitOutput.show(true);//ne prend pas le focus
+				}
+			}
+			let error = "";
+			for await (const chunk of child.stderr) {
+				console.error('stderr: ' + chunk);
+				error += chunk;
+				vscode.window.showErrorMessage(error);
+			}
+			const exitCode = await new Promise((resolve, reject) => {
+				child.on('close', resolve);
+			});
+			if (exitCode) {
+				throw new Error(`subprocess error exit ${exitCode}, ${error}`);
+			}
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 function updatePythonExtraPaths(cheminExtension:string) {
 	//* Chemin des stubs
@@ -77,5 +196,8 @@ function updatePythonExtraPaths(cheminExtension:string) {
 	vscode.workspace.getConfiguration("python.linting").update("enabled", true, vscode.ConfigurationTarget.Global);
 	//vscode.workspace.getConfiguration("python.linting").update("pylintEnabled", true, vscode.ConfigurationTarget.Global);
 }
+
+
+
 // this method is called when your extension is deactivated
 export function deactivate() { }
