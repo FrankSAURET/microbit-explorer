@@ -3,6 +3,7 @@
 * Fait maintenant une vérfification de la connexion avant d'afficher microbit pret.
 * Permet maintenant la mise à jour du firmware.
 * Affiche "Pas de fichier" si la microbit est vide.
+* Correction de bugs dans le retour d'erreur et amélioration des messages retournés.
 ## [0.2.3] - 06 juin 2022
 * Traduction de l'interface en français.
 * Ajoût d'icônes dans le texte pour augmenter la lisibilité.

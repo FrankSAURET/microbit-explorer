@@ -91,9 +91,18 @@
 				"title": "Microbit-Explorer",
 				"properties": {
 					"microbit.clearComments": {
-						"type": "boolean",
-						"default": false,
-						"description": "%package.suppress_comments_and_empty_lines_when_file_is_sent_to_micro_bit_warning_the_line_number_returned_by_the_error_is_then_false%"
+						"type": "string",
+						"default": "%package.respect_the_lines%",
+						"enum": [
+							"%package.leave_everything%",
+							"%package.respect_the_lines%",
+							"%package.delete_everything%"
+						],
+						"enumDescriptions": [
+							"%package.dont_remove_any_comments_or_empty_lines%",
+							"%package.removes_comments_but_respects_the_line_numbers_of_the_original_file_to_facilitate_debugging%",
+							"%package.deletes_all_comments_and_empty_lines_but_be_careful_in_case_of_error_the_returned_line_number_will_be_wrong%"
+						]
 					}
 				}
 			},
