@@ -26,7 +26,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 	readonly onDidChangeTreeData: vscode.Event<MicrobitFile | undefined | void> = this._onDidChangeTreeData.event;
 
 	constructor(private workspaceRoot: string | undefined) {
-		this.MicroBitOutput = vscode.window.createOutputChannel("micro:bit");
+		this.MicroBitOutput = vscode.window.createOutputChannel("micro:bit","bash");
 		this.testConnexion();
 		// this.term = vscode.window.createTerminal("micro:bit");
 		// this.MicroBitOutput.append || appendline || clear || replace ||
@@ -38,12 +38,12 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 		await this.Connect();
 
 		if (typeof this.serialPort === "undefined" || !this.serialPort.isOpen) {
-			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.you_must_connect_micro_bit_board_to_continue'));
+			this.MicroBitOutput.appendLine("Error " +i18n.t('MicrobitExplorer.you_must_connect_micro_bit_board_to_continue'));
 			this.MicroBitOutput.show(true);//ne prend pas le focus
 			this.microbitPrete = false;
 		}
 		else {
-			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.micro-bit-is-now-ready'));
+			this.MicroBitOutput.appendLine("[Starting] "+i18n.t('MicrobitExplorer.micro-bit-is-now-ready'));
 			this.MicroBitOutput.show(true);//ne prend pas le focus
 			this.microbitPrete = true;
 		}
@@ -201,7 +201,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 		await this.refresh();
 	}
 	public async Connect(): Promise<void> {
-		this.MicroBitOutput.clear();
+		//this.MicroBitOutput.clear();
 		if (!this.workspaceRoot) {
 			vscode.window.showWarningMessage(i18n.t('MicrobitExplorer.please_open_folder_or_workspace'));
 			return
@@ -284,14 +284,14 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 			let NombreDeCaractere = parseInt(result, 10);
 			if (isNaN(NombreDeCaractere)) throw new Error(i18n.t('MicrobitExplorer.this_is_not_a_number'));
 			await this.SendAndRecv("f.close()\r\n", false);
-			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.file_fileshort_is_now_on_micro_bit_target_on_this_serialport_path', fileShort, target, this.serialPort.path));
-			if (clearComments === i18n.t('package.delete_everything')) { this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.all_comments_and_blank_lines_have_been_removed')) }
-			if (clearComments === i18n.t('package.respect_the_lines')) { this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.the_comments_have_been_removed_but_the_line_numbering_has_been_respected')) }
+			this.MicroBitOutput.appendLine("[Done] " +i18n.t('MicrobitExplorer.file_fileshort_is_now_on_micro_bit_target_on_this_serialport_path', fileShort, target, this.serialPort.path));
+			if (clearComments === i18n.t('package.delete_everything')) { this.MicroBitOutput.appendLine("[Warning] "+i18n.t('MicrobitExplorer.all_comments_and_blank_lines_have_been_removed')) }
+			if (clearComments === i18n.t('package.respect_the_lines')) { this.MicroBitOutput.appendLine("[Warning] " + i18n.t('MicrobitExplorer.the_comments_have_been_removed_but_the_line_numbering_has_been_respected')) }
 		}
 		catch (e) {
 			result = await this.SendAndRecv("f.close()\r\n", false);
 			//this.MicroBitOutput.appendLine("277" + result);
-			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.error_unable_to_send_fileshort_to_micro_bit', fileShort));
+			this.MicroBitOutput.appendLine("Error " +i18n.t('MicrobitExplorer.error_unable_to_send_fileshort_to_micro_bit', fileShort));
 			this.MicroBitOutput.appendLine(e.message);
 		}
 	}
@@ -426,7 +426,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 				if (debutMessageErreur > -1) {
 					try {
 						if (fichierSource != "") { result=result.replace("__main__", fichierSource) }
-						this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.error_r_n') + "\r\n" + result.substring(debutMessageErreur));
+						this.MicroBitOutput.appendLine("Error " +  result.substring(debutMessageErreur));
 					} finally {
 						this.eventHasData.removeAllListeners('data');
 						clearTimeout(waitfordata);
