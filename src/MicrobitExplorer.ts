@@ -26,8 +26,9 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 	readonly onDidChangeTreeData: vscode.Event<MicrobitFile | undefined | void> = this._onDidChangeTreeData.event;
 
 	constructor(private workspaceRoot: string | undefined) {
-		this.MicroBitOutput = vscode.window.createOutputChannel("micro:bit","bash");
+		this.MicroBitOutput = vscode.window.createOutputChannel("micro:bit", "output-microbit");
 		this.testConnexion();
+		//this.ResetMicroBit();
 		// this.term = vscode.window.createTerminal("micro:bit");
 		// this.MicroBitOutput.append || appendline || clear || replace ||
 		// https://code.visualstudio.com/api/references/vscode-api#OutputChannel
@@ -38,13 +39,14 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 		await this.Connect();
 
 		if (typeof this.serialPort === "undefined" || !this.serialPort.isOpen) {
-			this.MicroBitOutput.appendLine("Error " +i18n.t('MicrobitExplorer.you_must_connect_micro_bit_board_to_continue'));
+			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.error') + i18n.t('MicrobitExplorer.you_must_connect_micro_bit_board_to_continue'));
 			this.MicroBitOutput.show(true);//ne prend pas le focus
 			this.microbitPrete = false;
 		}
 		else {
-			this.MicroBitOutput.appendLine("[Starting] "+i18n.t('MicrobitExplorer.micro-bit-is-now-ready'));
+			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.starting') + i18n.t('MicrobitExplorer.micro-bit-is-now-ready'));
 			this.MicroBitOutput.show(true);//ne prend pas le focus
+			await this.ResetMicroBit();
 			this.microbitPrete = true;
 		}
 
@@ -100,14 +102,14 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 
 		return Promise.resolve(this.GetFilesFromMicrobit());
 	}
-	public async ResetMicroBit(fichierSource?:string): Promise<void> {//@note ResetMicroBit
+	public async ResetMicroBit(fichierSource?: string): Promise<void> {//@note ResetMicroBit
 		if (typeof this.serialPort === "undefined" || !this.serialPort.isOpen) {
 			vscode.window.showInformationMessage(i18n.t('MicrobitExplorer.micro_bit_isnt_connected'));
 			return;
 		}
 		await this.StopRunning();
 		await this.SendAndRecv("import machine\r\n", false);
-		let result = await this.SendAndRecv("machine.reset()\r\n", false,undefined,fichierSource);
+		let result = await this.SendAndRecv("machine.reset()\r\n", false, undefined, fichierSource);
 		await this.refresh();
 	}
 	public async ResetDevice(): Promise<void> {
@@ -198,6 +200,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 
 		await this.SendAndRecv("import os\r\n", false);
 		await this.SendAndRecv("os.remove('" + node.filename + "')\r\n", false);
+		this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.done_0') + i18n.t('MicrobitExplorer.the_file_0_has_been_deleted', node.filename));
 		await this.refresh();
 	}
 	public async Connect(): Promise<void> {
@@ -234,26 +237,21 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 
 			);
 		}
-
 	}
 	async DownloadFile(file: string, dest: string): Promise<void> {
 		let result = await this.SendAndRecv("f = open('" + file + "', 'r')\r\n", false);
 		let content = await this.SendAndRecv("print(f.read())\r\n", false);
-
 		result = await this.SendAndRecv("f.close()\r\n", false);
-
 		await fs.writeFile(dest, content);
 	}
-
 	async downloadThisFile(node: MicrobitFile): Promise<void> {
-		//@note downLoadThisFile
 		if (typeof this.serialPort === "undefined" || !this.serialPort.isOpen) {
 			vscode.window.showInformationMessage(i18n.t('MicrobitExplorer.micro_bit_isnt_connected'));
 			return;
 		}
 		await this.StopRunning();
 		let targetFile = path.join(this.workspaceRoot, node.filename);
-		//@rappel Vérifier l'existence d'un fichier avant de l'écraser
+		//Vérifie l'existence d'un fichier avant de l'écraser
 		await fs.access(targetFile, fs.F_OK, async (err) => {
 			if (err) {
 				await this.DownloadFile(node.filename, targetFile);
@@ -277,21 +275,21 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 		let result: string;
 		let fileShort = file.split('\\').pop().split('/').pop();
 		const fichierDeSortie: string[] = await this.traiteFichier(file, clearComments);
-
 		try {
+			await this.ResetMicroBit();
 			await this.SendAndRecv("f = open('" + target + "', 'w')\r\n", false);
 			result = await this.SendAndRecv("f.write(b'" + fichierDeSortie.join("\\x0A") + "')\r\n", false, 1000);
-			let NombreDeCaractere = parseInt(result, 10);
-			if (isNaN(NombreDeCaractere)) throw new Error(i18n.t('MicrobitExplorer.this_is_not_a_number'));
+			// let NombreDeCaractere = parseInt(result, 10);
+			// if (isNaN(NombreDeCaractere)) throw new Error(i18n.t('MicrobitExplorer.this_is_not_a_number'));
 			await this.SendAndRecv("f.close()\r\n", false);
-			this.MicroBitOutput.appendLine("[Done] " +i18n.t('MicrobitExplorer.file_fileshort_is_now_on_micro_bit_target_on_this_serialport_path', fileShort, target, this.serialPort.path));
-			if (clearComments === i18n.t('package.delete_everything')) { this.MicroBitOutput.appendLine("[Warning] "+i18n.t('MicrobitExplorer.all_comments_and_blank_lines_have_been_removed')) }
-			if (clearComments === i18n.t('package.respect_the_lines')) { this.MicroBitOutput.appendLine("[Warning] " + i18n.t('MicrobitExplorer.the_comments_have_been_removed_but_the_line_numbering_has_been_respected')) }
+			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.done_0') + i18n.t('MicrobitExplorer.file_fileshort_is_now_on_micro_bit_target_on_this_serialport_path', fileShort, target, this.serialPort.path));
+			if (clearComments === i18n.t('package.delete_everything')) { this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.warning') + i18n.t('MicrobitExplorer.all_comments_and_blank_lines_have_been_removed')) }
+			if (clearComments === i18n.t('package.respect_the_lines')) { this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.warning') + i18n.t('MicrobitExplorer.the_comments_have_been_removed_but_the_line_numbering_has_been_respected')) }
 		}
 		catch (e) {
 			result = await this.SendAndRecv("f.close()\r\n", false);
 			//this.MicroBitOutput.appendLine("277" + result);
-			this.MicroBitOutput.appendLine("Error " +i18n.t('MicrobitExplorer.error_unable_to_send_fileshort_to_micro_bit', fileShort));
+			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.error') + i18n.t('MicrobitExplorer.error_unable_to_send_fileshort_to_micro_bit', fileShort));
 			this.MicroBitOutput.appendLine(e.message);
 		}
 	}
@@ -387,16 +385,17 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 		}
 		if (this.WaitForReset) {
 			this.WaitForReset = false;
-			this.ResetDevice();
+			//this.ResetDevice();
+			await this.ResetMicroBit();
 		}
 
 		return this.files
 	}
-	private async SendAndRecv(cmd: string, allowlog: boolean, timeout: number = 1000,fichierSource?:string): Promise<any> {
+	private async SendAndRecv(cmd: string, allowlog: boolean, timeout: number = 1000, fichierSource?: string): Promise<any> {
 		this.Log2Output = allowlog;
 		this.serialPort.write(cmd);
 
-		let data = await this.WaitForReady(timeout,fichierSource);
+		let data = await this.WaitForReady(timeout, fichierSource);
 		this.Log2Output = true;
 		if (data != null) {
 			// Ensure remove unwanted data
@@ -424,9 +423,22 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 				let result: string = this.buff;
 				let debutMessageErreur = result.search("Traceback");
 				if (debutMessageErreur > -1) {
+					let premiereFois=true;
 					try {
-						if (fichierSource != "") { result=result.replace("__main__", fichierSource) }
-						this.MicroBitOutput.appendLine("Error " +  result.substring(debutMessageErreur));
+						if (fichierSource != "") { result = result.replace("__main__", fichierSource) }
+						result = result.substring(debutMessageErreur);
+						const ligneErreur = result.split("\n");
+						ligneErreur.forEach((ligne, index) => {
+							if (index === 1 && ligne.trim() != "") {
+								ligne = ligne.replace("File", i18n.t('MicrobitExplorer.file'));
+								ligne = ligne.replace("line", i18n.t('MicrobitExplorer.line'));
+								this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.error') + ligne.trim());
+							}
+							if (index > 1 && ligne.trim() != "") { this.MicroBitOutput.appendLine("-------> " + ligne.trim()); }
+							// *****************************************
+							// Ajouter traduction erreur python
+							// 	*****************************************
+						});
 					} finally {
 						this.eventHasData.removeAllListeners('data');
 						clearTimeout(waitfordata);
