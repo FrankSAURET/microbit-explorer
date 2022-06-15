@@ -28,7 +28,7 @@
   "MicrobitExplorer.not_yet_implemented": "Pas encore implémenté!",
   "MicrobitExplorer.please_open_folder_or_workspace": "Veuillez ouvrir un dossier ou un espace de travail",
   "MicrobitExplorer.reset_device": "Réinitialiser la micro:bit",
-  "MicrobitExplorer.selected_file_must_be_a_py_file": "Le fichier sélectionné doit être un fichier « .py » !",
+  "MicrobitExplorer.selected_file_must_be_a_py_file": "Le fichier sélectionné doit être un fichier « .py » ! Cliquer dans la fenêtre d'édition avant d'envoyer le fichier.",
   "MicrobitExplorer.starting": "[Démarrage] ",
   "MicrobitExplorer.the_comments_have_been_removed_but_the_line_numbering_has_been_respected": "Les commentaires ont été supprimés mais la numérotation des lignes a été respectée.",
   "MicrobitExplorer.the_file_0_has_been_deleted": "Le fichier « {0} » a été supprimé",
