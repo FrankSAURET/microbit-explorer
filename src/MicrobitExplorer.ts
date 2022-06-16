@@ -3,6 +3,8 @@ import * as path from 'path';
 import { commands, Uri } from 'vscode';
 import i18n from './i18n';
 import internal = require('stream');
+import { disconnect } from 'process';
+import { connect } from 'http2';
 
 const fs = require('fs').promises;
 const { SerialPort } = require('serialport');
@@ -22,6 +24,8 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 	private noFile: string = i18n.t('MicrobitExplorer.no_file');
 	// MicroBitTerminal;
 	private premierAffichageErreur;
+	private versionMicroPython: string = "";
+	private erreurTrans: number = 0;
 
 	private _onDidChangeTreeData: vscode.EventEmitter<MicrobitFile | undefined | void> = new vscode.EventEmitter<MicrobitFile | undefined | void>();
 	readonly onDidChangeTreeData: vscode.Event<MicrobitFile | undefined | void> = this._onDidChangeTreeData.event;
@@ -45,15 +49,19 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 			this.microbitPrete = false;
 		}
 		else {
-			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.starting') + i18n.t('MicrobitExplorer.micro-bit-is-now-ready'));
-			this.MicroBitOutput.show(true);//ne prend pas le focus
 			this.premierAffichageErreur = true;
 			await this.ResetMicroBit();
+			await this.ResetMicroBit();
+			let versionmimi = this.versionMicroPython.split(";");
+			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.info') + versionmimi[0].trim());
+			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.info') + versionmimi[1].trim());
+			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.starting') + i18n.t('MicrobitExplorer.micro-bit-is-now-ready'));
+			this.MicroBitOutput.show(true);//ne prend pas le focus
 			this.microbitPrete = true;
 		}
 
 	}
-	public async sendFileToMicrobit(fileUri: vscode.Uri, clearComments: string) {
+	public async sendFileToMicrobit(fileUri: vscode.Uri, clearComments: string) {//@note sendFileToMicrobit
 		let PyFile;
 		let PyFileShort;
 		if (fileUri == null) {
@@ -75,7 +83,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 		else {
 			await this.Connect();
 			await this.ResetMicroBit();
-			await this.UploadFile(PyFile, PyFileShort, clearComments);//@note sendFileToMicrobit
+			await this.UploadFile(PyFile, PyFileShort, clearComments);
 			this.premierAffichageErreur = true;
 			await this.ResetMicroBit(PyFile.split('\\').pop().split('/').pop());
 			this.MicroBitOutput.show(true);//ne prend pas le focus
@@ -117,7 +125,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 			await this.SendAndRecv("import machine\r\n", false);
 			await this.SendAndRecv("machine.reset()\r\n", false, undefined, fichierSource);
 			await this.refresh();
-			return ;
+			return;
 		}
 	}
 	// public async ResetDevice(): Promise<void> {
@@ -303,7 +311,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 		const fichierDeSortie: string[] = await this.traiteFichier(file, clearComments);
 		try {
 			await this.SendAndRecv("f = open('" + target + "', 'w')\r\n", false);
-			result = await this.SendAndRecv("f.write(b'" + fichierDeSortie.join("\\x0A") + "')\r\n", false, 1000); 
+			result = await this.SendAndRecv("f.write(b'" + fichierDeSortie.join("\\x0A") + "')\r\n", false, 1000);
 			let NombreDeCaractere = parseInt(result, 10);
 			if (isNaN(NombreDeCaractere)) throw new Error(i18n.t('MicrobitExplorer.bad_response_from_the_micro_bit_try_again_to_send_your_file'));
 			await this.SendAndRecv("f.close()\r\n", false);
@@ -434,7 +442,16 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 		if (data != null) {
 			// Ensure remove unwanted data
 			let result = data.substring(data.search(cmd) + cmd.length + 1);
-			this.MicroBitOutput.appendLine("result : " + result);
+			//this.MicroBitOutput.appendLine("result : " + result);
+
+
+			let VUP = result.search("MicroPython");
+			if (VUP > -1 && this.versionMicroPython === "") {
+				const ligneErreur = result.split("\n");
+				this.versionMicroPython = ligneErreur[0];
+			}
+
+
 			return result;
 		}
 		else
@@ -483,6 +500,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 						clearTimeout(wait);
 						resolve(null);
 					}
+					
 				}
 			}, timeout);
 

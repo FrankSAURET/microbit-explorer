@@ -1,9 +1,11 @@
 # Change Log
 ## [0.2.4] -  2022
-* Fait maintenant une vérfification de la connexion avant d'afficher microbit pret.
-* Permet maintenant la mise à jour du firmware.
+* Fait une vérification de la connexion avant d'afficher microbit pret.
+* Permet la mise à jour du firmware.
 * Affiche "Pas de fichier" si la microbit est vide.
 * Correction de bugs dans le retour d'erreur et amélioration des messages retournés.
+* Affiche la version micropython et la version micro:bit au démarrage.
+* Le retour d'erreur est maintenant coloré, traduit (partiellement) et simplifié.
 ## [0.2.3] - 06 juin 2022
 * Traduction de l'interface en français.
 * Ajoût d'icônes dans le texte pour augmenter la lisibilité.
@@ -30,12 +32,12 @@
 * La fonction sélection du port devant s'imposer comme port de connexion  pour toutes les autres commandes - ouvrir un panneau de connexion qui permet d'identifier toutes les microbit connectées et d'afficher leur port de connexion sur chacune.
 * nettoyer les trucs inutiles.
 * Faire un pas à pas.
-* coloriser le retour d'erreur et faire un lien avec le programme local.
+* Faire un lien dans le retour d'erreur avec le programme local.
 * ???Ajouter une fonctionnalité de renomage dans l'explorateur.???
 * Implémenter le glisser déposer pour upload et download.
 * Colorer la vue microbit.
 * Propose une option permettant de Garder des lignes vides lors de la suppression des commentaires et mettre cet envoie par défaut (Supprimer lignes vides et commentaires/Supprimer les commentaires/Garder tout).
 *??? Déplacement du bouton "télécharger tous les fichier" dans l'explorateur PC.???
-* Afficher le message mmicropython au démarrage
+
 
 

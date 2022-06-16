@@ -21,7 +21,7 @@
   "MicrobitExplorer.line": "ligne",
   "MicrobitExplorer.micro-bit-is-now-ready": "Microbit-Explorer est maintenant prêt !",
   "MicrobitExplorer.micro_bit_is_connected_and_trying_to_list_files": "La micro:bit est connectée et essaie de lister les fichiers",
-  "MicrobitExplorer.micro_bit_is_connected_to_serialpath": "La micro:bit est connecté à {0}",
+  "MicrobitExplorer.micro_bit_is_connected_to_serialpath": "La micro:bit est connectée à {0}",
   "MicrobitExplorer.micro_bit_isnt_connected": "La carte micro:bit n'est pas connectée",
   "MicrobitExplorer.micro_bit_reset_done": "Réinitialisation de la micro:bit terminée",
   "MicrobitExplorer.no": "non",
