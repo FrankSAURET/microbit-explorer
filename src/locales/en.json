@@ -1,6 +1,7 @@
 {
   "MicrobitExplorer.all_comments_and_blank_lines_have_been_removed": "All comments and blank lines have been removed.",
   "MicrobitExplorer.all_files_are_uploaded": "All files are uploaded.",
+  "MicrobitExplorer.bad_response_from_the_micro_bit_try_again_to_send_your_file": "Bad response from the micro:bit. Try again to send your file.",
   "MicrobitExplorer.begin_read": "Begin read",
   "MicrobitExplorer.cannot_connect_to_serialpath": "Cannot connect to {0}",
   "MicrobitExplorer.connecting_to_serialpath": "Connecting to {0}",

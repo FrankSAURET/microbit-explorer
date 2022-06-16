@@ -1,6 +1,7 @@
 {
     "MicrobitExplorer.all_comments_and_blank_lines_have_been_removed": "Tous les commentaires et les lignes vides ont été supprimés.",
     "MicrobitExplorer.all_files_are_uploaded": "Tous les fichiers ont été envoyés.",
+    "MicrobitExplorer.bad_response_from_the_micro_bit_try_again_to_send_your_file": "Mauvaise réponse de la micro:bit. Éssayez à nouveau d'envoyer votre fichier.",
     "MicrobitExplorer.begin_read": "Commencer la lecture",
     "MicrobitExplorer.cannot_connect_to_serialpath": "Impossible de se connecter à {0}",
     "MicrobitExplorer.connecting_to_serialpath": "Connexion à {0}",
@@ -11,7 +12,7 @@
     "MicrobitExplorer.end_read": "Lecture terminée",
     "MicrobitExplorer.error": "[Erreur] ",
     "MicrobitExplorer.error_r_n": "Erreur :",
-    "MicrobitExplorer.error_unable_to_send_fileshort_to_micro_bit": "Erreur : Impossible d'envoyer « {0} » à micro:bit.",
+    "MicrobitExplorer.error_unable_to_send_fileshort_to_micro_bit": "Erreur : Impossible d'envoyer « {0} » à la micro:bit.",
     "MicrobitExplorer.error_while_trying_to_connect": "Erreur lors de la tentative de connexion",
     "MicrobitExplorer.f_open_no_file_w_r_n": "f = open('Aucun fichier', 'w')\\r\\n",
     "MicrobitExplorer.file": "Fichier",
