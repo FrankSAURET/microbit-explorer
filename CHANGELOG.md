@@ -36,5 +36,6 @@
 * Colorer la vue microbit.
 * Propose une option permettant de Garder des lignes vides lors de la suppression des commentaires et mettre cet envoie par défaut (Supprimer lignes vides et commentaires/Supprimer les commentaires/Garder tout).
 *??? Déplacement du bouton "télécharger tous les fichier" dans l'explorateur PC.???
+* Afficher le message mmicropython au démarrage
 
 

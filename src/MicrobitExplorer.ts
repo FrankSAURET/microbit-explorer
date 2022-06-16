@@ -180,7 +180,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 			console.log("i18n.t('MicrobitExplorer.micro_bit_isnt_connected')");
 			return;
 		}
-		this.serialPort.close();
+		await this.serialPort.close();
 		this.refresh();
 	}
 	public async downloadFiles(): Promise<void> {
@@ -446,7 +446,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 	}
 	private async SendAndRecv(cmd: string, allowlog: boolean, timeout: number = 1000, fichierSource?: string): Promise<any> {
 		this.Log2Output = allowlog;
-		this.serialPort.write(cmd);
+		await this.serialPort.write(cmd);
 
 		let data = await this.WaitForReady(timeout, fichierSource);
 		this.MicroBitOutput.appendLine("data : "+data+" timeout : "+timeout+" Fichiersource : "+fichierSource);
