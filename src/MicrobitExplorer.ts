@@ -420,11 +420,21 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 		await this.serialPort.write(cmd);
 
 		let data = await this.WaitForReady(timeout, fichierSource);
-		//this.MicroBitOutput.appendLine("data : "+data+" timeout : "+timeout+" Fichiersource : "+fichierSource);
+		//***** */
+		// this.MicroBitOutput.appendLine("cmd : " + cmd);
+		// this.MicroBitOutput.appendLine("data : "+data);
+		// if (data.search(cmd.trim()) < 0 && cmd.length>1){
+		// 	await this.serialPort.write(cmd);
+		// 	data = await this.WaitForReady(timeout, fichierSource);
+		// 	this.MicroBitOutput.appendLine("cmd 2 : " + cmd);
+		// 	this.MicroBitOutput.appendLine("data 2 : " + data);
+		// }
+		//***** */
 		this.Log2Output = true;
 		if (data != null) {
 			// Ensure remove unwanted data
 			let result = data.substring(data.search(cmd) + cmd.length + 1);
+			this.MicroBitOutput.appendLine("result : " + result);
 			return result;
 		}
 		else
