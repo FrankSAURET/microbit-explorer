@@ -26,6 +26,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 	private premierAffichageErreur;
 	private versionMicroPython: string = "";
 	private erreurTrans: number = 0;
+	private erreurAuLancement: boolean = false;
 
 	private _onDidChangeTreeData: vscode.EventEmitter<MicrobitFile | undefined | void> = new vscode.EventEmitter<MicrobitFile | undefined | void>();
 	readonly onDidChangeTreeData: vscode.Event<MicrobitFile | undefined | void> = this._onDidChangeTreeData.event;
@@ -52,11 +53,13 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 			this.premierAffichageErreur = true;
 			await this.ResetMicroBit();
 			await this.ResetMicroBit();
-			let versionmimi = this.versionMicroPython.split(";");
-			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.info') + versionmimi[0].trim());
-			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.info') + versionmimi[1].trim());
-			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.starting') + i18n.t('MicrobitExplorer.micro-bit-is-now-ready'));
-			this.MicroBitOutput.show(true);//ne prend pas le focus
+			if (!this.erreurAuLancement) {
+				let versionmimi = this.versionMicroPython.split(";");
+				this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.info') + versionmimi[0].trim());
+				this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.info') + versionmimi[1].trim());
+				this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.starting') + i18n.t('MicrobitExplorer.micro-bit-is-now-ready'));
+				this.MicroBitOutput.show(true);//ne prend pas le focus
+			}
 			this.microbitPrete = true;
 		}
 
@@ -323,7 +326,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 		catch (e) {
 			result = await this.SendAndRecv("f.close()\r\n", false);
 			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.error') + i18n.t('MicrobitExplorer.error_unable_to_send_fileshort_to_micro_bit', fileShort));
-			this.MicroBitOutput.appendLine("-------> " + e.message);
+			this.MicroBitOutput.appendLine("         " + e.message);
 			//this.ResetMicroBit();
 		}
 	}
@@ -485,13 +488,14 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 									ligne = ligne.replace("File", i18n.t('MicrobitExplorer.file'));
 									ligne = ligne.replace("line", i18n.t('MicrobitExplorer.line'));
 									this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.error') + ligne.trim());
+									// *****************************************
+									// Ajouter traduction erreur python
+									// 	*****************************************
 								}
-								if (index > 1 && ligne.trim() != "") { this.MicroBitOutput.appendLine("-------> " + ligne.trim()); }
-								// *****************************************
-								// Ajouter traduction erreur python
-								// 	*****************************************
+								if (index > 1 && ligne.trim() != "") { this.MicroBitOutput.appendLine("         " + ligne.trim()); }
 							});
 							this.premierAffichageErreur = false;
+							this.erreurAuLancement = true;
 						}
 
 					} finally {
@@ -500,18 +504,23 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 						clearTimeout(wait);
 						resolve(null);
 					}
-					
+
 				}
 			}, timeout);
 
 			this.eventHasData.on("data", function (this: any) {
+				// Le >>> finit une réception
 				if (this.buff != null) {
 					if (this.buff.search(">>> ") > -1) {
 						clearTimeout(wait);
 						clearTimeout(waitfordata);
 						this.eventHasData.removeAllListeners('data');
 						let data = this.buff.substring(0, this.buff.search("\r\n>>> "));
-						this.buff = "";
+						//this.MicroBitOutput.appendLine("data : "+data);
+						//this.MicroBitOutput.appendLine("buff : " +this.buff);
+						this.buff = this.buff.replace(data + "\r\n>>> ", "")
+						//this.MicroBitOutput.appendLine("buff-2 : " + this.buff);
+						//this.buff = "";
 						resolve(data);
 					}
 				}

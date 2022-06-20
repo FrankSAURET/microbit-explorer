@@ -64,7 +64,7 @@ You can  add your language directly in  this file
                     </dict>
                 </dict>
                 <key>match</key>
-                <string>(\[Error\]|\[Erreur\]|-------> )(.+)</string>
+                <string>(\[Error\]|\[Erreur\]|         )(.+)</string>
                 <key>name</key>
                 <string>output-microbit.error</string>
             </dict>
