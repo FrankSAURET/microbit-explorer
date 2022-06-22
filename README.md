@@ -27,19 +27,20 @@ Thanks for their work.
 
 
 ## Features
-* Provides translated stubs (see below) for microPython and micro:bit.
+* Provides translated stubs and error (see below) for microPython and micro:bit.
 * Supports both micro:bit V1 and V2.
 * Quickly send py file to the micro:bit.
 * If wanted, clear all comments and empty line.
-* Reads error messages from the micro:bit.
+* Reads and translate error messages from the micro:bit.
 * Add button to send file directly in  micro:bit main file.
 * Add contextual menu in file explorer to send file to micro:bit with or without comments.
+* Possibility to directly update micro:bit firmware.
 ### and in the explorer view
 * Explore files in micro:bit.
 * Upload all files to micro:bit.
 * Download files from micro:bit to local space.
 * Delete file on micro:bit.
-* Add "Micro:bit" output to get status of device.
+* Add "Micro:bit" output to get status of device and reporting error.
 
 ## Preconditions
 * Install MicroPython in micro:bit first. 
@@ -48,31 +49,33 @@ Thanks for their work.
 
 ## How to use
 
-* Clic on the colored micro:bit button to send your python file into main.py on micro:bit.
+* Click on the colored micro:bit button to send your python file into main.py on micro:bit. This button only appears for .py files.
 
 or
-* Right clic in the file explorer to send the file without renaming it into the micro:bit with or without comments.
+* Right click in on one file in the file explorer to send the file without renaming it into the micro:bit with or without comments.
 
-Error message (and other) appear directly in the output console.
+Error message (and others) appears directly in the output console.
 
-* Or clic on micro:bit icon to open microbit explorer.
+* Or click on micro:bit icon to open microbit explorer.
 
 https://user-images.githubusercontent.com/1547522/164513525-d6d341de-2d4d-4e49-8d26-67e57ef89f80.mp4
 
 ## Translate 
 1. Clone repository.
 1. Run "npm install" at root.
-### stubs
+### stubs and error
 
 1. Duplicate one of the stubs-electropol-xx folder.
 1. Rename this folder with locales code (https://code.visualstudio.com/docs/getstarted/locales).
+1. Translate it (error are in "micropython\error.json")
 1. Pull request or send me by private message.
 ### Interface
 1. You can use "i18n ally" extension as recommended.
 1. Duplicate the file with local code you understand (in src\locales).
 1. Rename it with locales code (https://code.visualstudio.com/docs/getstarted/.
+1. Translate it.
 1. Pull request or send me by private message.
-1. If you want to test, copy the file in root folder and rename like package.nls.XX.json where XX is the local code.
+1. If you want to test, copy the file in the root folder and rename like package.nls.XX.json where XX is the local code.
 ## Quick links
 
 * [Micro:bit MicroPython](https://microbit-micropython.readthedocs.io/en/v2-docs) 

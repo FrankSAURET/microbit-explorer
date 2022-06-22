@@ -5,6 +5,8 @@ import i18n from './i18n';
 import internal = require('stream');
 import { disconnect } from 'process';
 import { connect } from 'http2';
+import { translateError } from './translatePythonError';
+
 
 const fs = require('fs').promises;
 const { SerialPort } = require('serialport');
@@ -27,6 +29,8 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 	private versionMicroPython: string = "";
 	private erreurTrans: number = 0;
 	private erreurAuLancement: boolean = false;
+	private extraPaths: string[] = vscode.workspace.getConfiguration().get("python.autoComplete.extraPaths");
+	private errorPythonFile = path.join(this.extraPaths.filter(path => path.search("micropython") > -1)[0], "error.json");
 
 	private _onDidChangeTreeData: vscode.EventEmitter<MicrobitFile | undefined | void> = new vscode.EventEmitter<MicrobitFile | undefined | void>();
 	readonly onDidChangeTreeData: vscode.Event<MicrobitFile | undefined | void> = this._onDidChangeTreeData.event;
@@ -492,7 +496,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 									// Ajouter traduction erreur python
 									// 	*****************************************
 								}
-								if (index > 1 && ligne.trim() != "") { this.MicroBitOutput.appendLine("         " + ligne.trim()); }
+								if (index > 1 && ligne.trim() != "") { this.MicroBitOutput.appendLine("         " + translateError(ligne.trim(), this.errorPythonFile,": ")); }
 							});
 							this.premierAffichageErreur = false;
 							this.erreurAuLancement = true;

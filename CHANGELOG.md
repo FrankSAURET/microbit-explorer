@@ -1,11 +1,15 @@
 # Change Log
-## [0.2.4] -  2022
-* Fait une vérification de la connexion avant d'afficher microbit pret.
+## [0.2.4] - 22 juin 2022
+* Fait une vérification de la connexion avant d'afficher microbit prêt.
 * Permet la mise à jour du firmware.
 * Affiche "Pas de fichier" si la microbit est vide.
 * Correction de bugs dans le retour d'erreur et amélioration des messages retournés.
 * Affiche la version micropython et la version micro:bit au démarrage.
-* Le retour d'erreur est maintenant coloré, traduit (partiellement) et simplifié.
+* Le retour d'erreur est maintenant coloré, traduit et simplifié. Je ferais évoluer la traduction française pour la rendre plus pédagogique mais pas la version anglaise.
+* Propose une option permettant de Garder des lignes vides lors de la suppression des commentaires et mettre cet envoie par défaut (Supprimer lignes vides et commentaires/Supprimer les commentaires/Garder tout).
+* Traduction du readme.
+### Bug
+* Un bug se produit systématiquement lors de la correction d'une erreur. Je l'ai intercepté et signalé mais je n'arrive pas à le corriger. Néanmoins un renvoi du fichier corrigé (plusieurs fois éventuellement) résous toujours le problème.
 ## [0.2.3] - 06 juin 2022
 * Traduction de l'interface en français.
 * Ajoût d'icônes dans le texte pour augmenter la lisibilité.
@@ -35,9 +39,9 @@
 * Faire un lien dans le retour d'erreur avec le programme local.
 * ???Ajouter une fonctionnalité de renomage dans l'explorateur.???
 * Implémenter le glisser déposer pour upload et download.
-* Colorer la vue microbit.
-* Propose une option permettant de Garder des lignes vides lors de la suppression des commentaires et mettre cet envoie par défaut (Supprimer lignes vides et commentaires/Supprimer les commentaires/Garder tout).
-*??? Déplacement du bouton "télécharger tous les fichier" dans l'explorateur PC.???
+* ??? Déplacement du bouton "télécharger tous les fichier" dans l'explorateur PC.???
+* Afficher les bornes de la microbit.
+* Afficher une liste d'exemple.
 
 
 
