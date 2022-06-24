@@ -35,6 +35,7 @@ Merci pour leur travail.
 * Ajout d’un bouton pour envoyer un fichier directement dans le fichier main.py de la micro:bit.
 * Ajout d’un menu contextuel dans l’explorateur de fichier pour envoyer un fichier à la micro:bit avec ou sans commentaires.
 * Possibilité de mettre à jour directement le firmware de la micro:bit.
+* Possibilité d'afficher le brochage de la micro:bit.
 ### et dans la vue de l’explorateur
 * Explorez les fichiers dans la micro:bit.
 * Téléchargez tous les fichiers sur la micro:bit.

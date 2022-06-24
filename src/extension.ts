@@ -18,24 +18,25 @@ export function activate(context: vscode.ExtensionContext) {
 		? vscode.workspace.workspaceFolders[0].uri.fsPath : undefined;
 	const microbitFileProvider = new MicrobitFileProvider(rootPath);
 	updatePythonExtraPaths(context.extensionPath);
-	
+
 	vscode.window.registerTreeDataProvider('microbit-explorer-view', microbitFileProvider);
 	//#region registerCommand
 	// The command has been defined in the package.json file. The commandId parameter must match the command field in package.json.
-	vscode.commands.registerCommand('microbit.sendFileToMicrobitMain', () => microbitFileProvider.sendFileToMicrobit(null, vscode.workspace.getConfiguration("microbit").get("clearComments")))
-	vscode.commands.registerCommand('microbit.simul', () => microbitFileProvider.simulMicrobit())
-	vscode.commands.registerCommand('microbit.sendFileToMicrobit', (fileUri: vscode.Uri) => microbitFileProvider.sendFileToMicrobit(fileUri, vscode.workspace.getConfiguration("microbit").get("clearComments")))
-	vscode.commands.registerCommand('microbit.sendCleanedFileToMicrobit', (fileUri: vscode.Uri) => microbitFileProvider.sendCleanedFileToMicrobit(fileUri))
-	vscode.commands.registerCommand('microbit.refreshEntry', () => microbitFileProvider.refresh());
-	vscode.commands.registerCommand('microbit.uploadEntry', () => microbitFileProvider.uploadFiles());
-	vscode.commands.registerCommand('microbit.downloadEntry', () => microbitFileProvider.downloadFiles());
-	vscode.commands.registerCommand('microbit.deleteEntry', (node: MicrobitFile) => microbitFileProvider.deleteFile(node));
-	vscode.commands.registerCommand('microbit.downloadThisFile', (node: MicrobitFile) => microbitFileProvider.downloadThisFile(node));
-	vscode.commands.registerCommand('microbit.connectEntry', () => microbitFileProvider.Connect());
-	vscode.commands.registerCommand('microbit.resetEntry', () => microbitFileProvider.ResetMicroBit());
-	vscode.commands.registerCommand('microbit.disconnectEntry', () => microbitFileProvider.DisconnectDevice());
-	vscode.commands.registerCommand('microbit.updateFirmware', () => updateFirmware());
-	
+	vscode.commands.registerCommand('Microbit-Explorer.sendFileToMicrobitMain', () => microbitFileProvider.sendFileToMicrobit(null, vscode.workspace.getConfiguration("Microbit-Explorer").get("clearComments")))
+	vscode.commands.registerCommand('Microbit-Explorer.simul', () => microbitFileProvider.simulMicrobit())
+	vscode.commands.registerCommand('Microbit-Explorer.sendFileToMicrobit', (fileUri: vscode.Uri) => microbitFileProvider.sendFileToMicrobit(fileUri, vscode.workspace.getConfiguration("Microbit-Explorer").get("clearComments")))
+	vscode.commands.registerCommand('Microbit-Explorer.sendCleanedFileToMicrobit', (fileUri: vscode.Uri) => microbitFileProvider.sendCleanedFileToMicrobit(fileUri))
+	vscode.commands.registerCommand('Microbit-Explorer.refreshEntry', () => microbitFileProvider.refresh());
+	vscode.commands.registerCommand('Microbit-Explorer.uploadEntry', () => microbitFileProvider.uploadFiles());
+	vscode.commands.registerCommand('Microbit-Explorer.downloadEntry', () => microbitFileProvider.downloadFiles());
+	vscode.commands.registerCommand('Microbit-Explorer.deleteEntry', (node: MicrobitFile) => microbitFileProvider.deleteFile(node));
+	vscode.commands.registerCommand('Microbit-Explorer.downloadThisFile', (node: MicrobitFile) => microbitFileProvider.downloadThisFile(node));
+	vscode.commands.registerCommand('Microbit-Explorer.connectEntry', () => microbitFileProvider.Connect());
+	vscode.commands.registerCommand('Microbit-Explorer.resetEntry', () => microbitFileProvider.ResetMicroBit());
+	vscode.commands.registerCommand('Microbit-Explorer.disconnectEntry', () => microbitFileProvider.DisconnectDevice());
+	vscode.commands.registerCommand('Microbit-Explorer.updateFirmware', () => updateFirmware());
+	vscode.commands.registerCommand('Microbit-Explorer.showPinMap', () => showPinMap(context.extensionUri));
+
 	//#endregion
 	async function updateFirmware() {
 		try {
@@ -156,14 +157,14 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	}
 }
-function updatePythonExtraPaths(cheminExtension:string) {
+function updatePythonExtraPaths(cheminExtension: string) {
 	//* Chemin des stubs
 	// TODO Revoir ici le __dirname qui est sans doute déprécié
 	// TODO « python.analysis.extraPaths » est-il nécessaire ? (Additional import search resolution paths)
 	// Change le chemin des stubs en fonction de la langue locale. Si la traduction n'existe pas passe en anglais. Possibilité de forcer la langue à l'anglais dans les paramètres de l'extension.
-	
-	let cheminStub = "stubs-electropol-"+ env.language.toLocaleLowerCase();
-	if (!fs.existsSync(path.join(cheminExtension, cheminStub)) || vscode.workspace.getConfiguration().get("microbit.forceStubsEn")){
+
+	let cheminStub = "stubs-electropol-" + env.language.toLocaleLowerCase();
+	if (!fs.existsSync(path.join(cheminExtension, cheminStub)) || vscode.workspace.getConfiguration().get("Microbit-Explorer.forceStubsEn")) {
 		cheminStub = "stubs-electropol-en";
 	}
 	let cheminStubMicrobit = path.join(cheminExtension, cheminStub, "lib"); // __dirname = Chemin du script en cours
@@ -196,8 +197,34 @@ function updatePythonExtraPaths(cheminExtension:string) {
 	vscode.workspace.getConfiguration("python.linting").update("enabled", true, vscode.ConfigurationTarget.Global);
 	//vscode.workspace.getConfiguration("python.linting").update("pylintEnabled", true, vscode.ConfigurationTarget.Global);
 }
+function showPinMap(cheminExtension): any {
+	const titre = i18n.t('extension.micro_bit_pins')
+	const panel = vscode.window.createWebviewPanel(
+		i18n.t('extension.pins'),
+		titre,
+		vscode.ViewColumn.Active, {
+	});
+	const imagePinOut = panel.webview.asWebviewUri(vscode.Uri.file(vscode.Uri.joinPath(cheminExtension, "image", i18n.t('extension.pinoutv2v1_png')).fsPath));
+		
+	let CodeHTML =`
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>${titre}</title>
+		</head>
+		<body>
+			<img src="${imagePinOut}"/>
+		</body>
+	</html>`;
+	panel.webview.html = CodeHTML;
 
+
+
+}
 
 
 // this method is called when your extension is deactivated
 export function deactivate() { }
+
+

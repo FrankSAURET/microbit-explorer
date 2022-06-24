@@ -2,13 +2,7 @@
 <p align="center">
 <img src="image/microbit-explorer.png" alt="Explorer file on Micro:bit!">
 </p>
-<p align="center">
-  <span>English</span> |
-  <a href="./">English</a> |
-  <span>Français</span> |  
-  <a href="./lang/french">Français</a> |
-  
-</p>
+
 A Visual Studio Code extension for students who code the BBC micro:bit with Python. 
 
 Explore micro:bit with MicroPython in Visual Studio Code.
@@ -42,6 +36,7 @@ Thanks for their work.
 * Add button to send file directly in  micro:bit main file.
 * Add contextual menu in file explorer to send file to micro:bit with or without comments.
 * Possibility to directly update micro:bit firmware.
+* Possibility to display micro:bit pinout.
 ### and in the explorer view
 * Explore files in micro:bit.
 * Upload all files to micro:bit.

@@ -18,7 +18,6 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 	private files = null;
 	private eventHasData = new events.EventEmitter();
 	// private clearComments: boolean = vscode.workspace.getConfiguration("microbit").get("clearComments");
-	private forceSave: boolean = vscode.workspace.getConfiguration("microbit").get("forceSave");
 	private WaitForReset = false;
 	private Log2Output = true;
 	MicroBitOutput;
@@ -44,7 +43,6 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 		// https://code.visualstudio.com/api/references/vscode-api#OutputChannel
 		// https://code.visualstudio.com/api/references/vscode-api#Terminal
 	};
-	//#region Liaison (View Model)
 	public async testConnexion() {
 		await this.Connect();
 
@@ -68,11 +66,15 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 		}
 
 	}
+	//#region Liaison (View Model)
+
 	public async sendFileToMicrobit(fileUri: vscode.Uri, clearComments: string) {//@note sendFileToMicrobit
 		let PyFile;
 		let PyFileShort;
+		let forceSave: boolean = vscode.workspace.getConfiguration("Microbit-Explorer").get("forceSave");
+		
 		if (fileUri == null) {
-			if (this.forceSave) {
+			if (forceSave) {
 				await vscode.window.activeTextEditor.document.save();
 			}
 			PyFile = vscode.window.activeTextEditor.document.fileName;
@@ -135,25 +137,6 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 			return;
 		}
 	}
-	// public async ResetDevice(): Promise<void> {
-	// 	if (typeof this.serialPort === "undefined" || !this.serialPort.isOpen) {
-	// 		this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.warning') + i18n.t('MicrobitExplorer.micro_bit_isnt_connected'));
-	// 			this.MicroBitOutput.show(true);//ne prend pas le focus
-	// 		return null;
-	// 	}
-
-	// 	let result = await vscode.window.withProgress({
-	// 		location: vscode.ProgressLocation.Window,
-	// 		cancellable: false,
-	// 		title: i18n.t('MicrobitExplorer.reset_device')
-	// 	}, async (progress) => {
-	// 		progress.report({ increment: 0 });
-	// 		let data = await this.SendAndRecv("\x04", true);
-	// 		progress.report({ increment: 100 });
-	// 		return data;
-	// 	});
-	// 	return result;
-	// }
 	public async StopRunning(): Promise<void> {
 		if (typeof this.serialPort === "undefined") {
 			this.MicroBitOutput.appendLine(i18n.t('MicrobitExplorer.warning') + i18n.t('MicrobitExplorer.micro_bit_isnt_connected'));
@@ -189,7 +172,6 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 		await this.refresh();
 		this.WaitForReset = true;
 	}
-
 	public async DisconnectDevice(): Promise<void> {
 		if (typeof this.serialPort === "undefined" || !this.serialPort.isOpen) {
 			console.log("i18n.t('MicrobitExplorer.micro_bit_isnt_connected')");
@@ -394,7 +376,10 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 				line = line.trimEnd();// Suppression des espaces en fin  de ligne
 				fichierDeSortie.push(line);
 			}
-
+			else if (clearComments === i18n.t('package.leave_everything')) {
+				line = line.trimEnd();
+				fichierDeSortie.push(line);
+			}
 		});
 		return fichierDeSortie;
 	}
@@ -496,7 +481,7 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 									// Ajouter traduction erreur python
 									// 	*****************************************
 								}
-								if (index > 1 && ligne.trim() != "") { this.MicroBitOutput.appendLine("         " + translateError(ligne.trim(), this.errorPythonFile,": ")); }
+								if (index > 1 && ligne.trim() != "") { this.MicroBitOutput.appendLine("         " + translateError(ligne.trim(), this.errorPythonFile, ": ")); }
 							});
 							this.premierAffichageErreur = false;
 							this.erreurAuLancement = true;

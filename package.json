@@ -3,7 +3,7 @@
 	"name": "microbit-explorer",
 	"displayName": "microbit-explorer",
 	"description": "Microbit Explorer: Connect, browse, download, delete, upload multiple files",
-	"version": "0.2.4",
+	"version": "0.2.5",
 	"author": {
 		"name": "Frank SAURET",
 		"email": "frank.sauret.prof@gmail.com",
@@ -70,7 +70,6 @@
 		"languages": [
 			{
 				"id": "output-microbit"
-
 			}
 		],
 		"grammars": [
@@ -103,7 +102,7 @@
 			{
 				"title": "Microbit-Explorer",
 				"properties": {
-					"microbit.clearComments": {
+					"Microbit-Explorer.clearComments": {
 						"type": "string",
 						"default": "%package.respect_the_lines%",
 						"enum": [
@@ -122,7 +121,17 @@
 			{
 				"title": "Microbit-Explorer",
 				"properties": {
-					"microbit.forceSave": {
+					"Microbit-Explorer.fixHiddenArgument": {
+						"type": "boolean",
+						"default": true,
+						"description": "%package.in_python_a_function_always_takes_self_as_an_argument_but_this_argument_is_hidden_from_use_the_number_returned_in_the_event_of_an_error_is_therefore_misleading_for_beginners_true_corrects_the_number_of_arguments_this_function_is_experimental%"
+					}
+				}
+			},
+			{
+				"title": "Microbit-Explorer",
+				"properties": {
+					"Microbit-Explorer.forceSave": {
 						"type": "boolean",
 						"default": true,
 						"description": "%package.forces_saving_the_file_before_uploading_it_to_the_microbit%"
@@ -132,7 +141,7 @@
 			{
 				"title": "Microbit-Explorer",
 				"properties": {
-					"microbit.comPort": {
+					"Microbit-Explorer.comPort": {
 						"type": "string",
 						"default": null,
 						"description": "%package.specifies_the_selected_micro_bit_com_port%"
@@ -142,7 +151,7 @@
 			{
 				"title": "Microbit-Explorer",
 				"properties": {
-					"microbit.forceStubsEn": {
+					"Microbit-Explorer.forceStubsEn": {
 						"type": "boolean",
 						"default": false,
 						"description": "%package.force_the_python_stub_to_english%"
@@ -152,7 +161,8 @@
 		],
 		"commands": [
 			{
-				"command": "microbit.sendFileToMicrobitMain",
+				"command": "Microbit-Explorer.sendFileToMicrobitMain",
+				"category": "micro:bit Explorer",
 				"title": "%package.micro_bit_-_upload_current_file_in_main_py_on_micro_bit%",
 				"icon": {
 					"dark": "image/microbitUpload16.svg",
@@ -160,15 +170,23 @@
 				}
 			},
 			{
-				"command": "microbit.sendFileToMicrobit",
+				"command": "Microbit-Explorer.showPinMap",
+				"category": "micro:bit Explorer",
+				"title": "%package.show_micro_bit_pins_image%"
+			},
+			{
+				"command": "Microbit-Explorer.sendFileToMicrobit",
+				"category": "micro:bit Explorer",
 				"title": "%package.micro_bit_-_send_this_file_to_micro_bit%"
 			},
 			{
-				"command": "microbit.sendCleanedFileToMicrobit",
+				"command": "Microbit-Explorer.sendCleanedFileToMicrobit",
+				"category": "micro:bit Explorer",
 				"title": "%package.micro_bit_-_send_this_file_-_without_comment_and_empty_lines_-_to_micro_bit%"
 			},
 			{
-				"command": "microbit.refreshEntry",
+				"command": "Microbit-Explorer.refreshEntry",
+				"category": "micro:bit Explorer",
 				"title": "%package.refresh_content_from_micro_bit%",
 				"icon": {
 					"light": "image/light/refresh.svg",
@@ -176,7 +194,8 @@
 				}
 			},
 			{
-				"command": "microbit.uploadEntry",
+				"command": "Microbit-Explorer.uploadEntry",
+				"category": "micro:bit Explorer",
 				"title": "%package.upload_all_files_to_micro_bit%",
 				"icon": {
 					"light": "image/light/upload.svg",
@@ -184,7 +203,8 @@
 				}
 			},
 			{
-				"command": "microbit.downloadEntry",
+				"command": "Microbit-Explorer.downloadEntry",
+				"category": "micro:bit Explorer",
 				"title": "%package.download_all_files_from_micro_bit%",
 				"icon": {
 					"light": "image/light/download.svg",
@@ -192,7 +212,8 @@
 				}
 			},
 			{
-				"command": "microbit.deleteEntry",
+				"command": "Microbit-Explorer.deleteEntry",
+				"category": "micro:bit Explorer",
 				"title": "%package.delete_this_file_on_micro_bit%",
 				"icon": {
 					"dark": "image/trash16.svg",
@@ -200,7 +221,8 @@
 				}
 			},
 			{
-				"command": "microbit.downloadThisFile",
+				"command": "Microbit-Explorer.downloadThisFile",
+				"category": "micro:bit Explorer",
 				"title": "%package.download_this_file_from_micro_bit%",
 				"icon": {
 					"dark": "image/microbitDownload16.svg",
@@ -208,7 +230,8 @@
 				}
 			},
 			{
-				"command": "microbit.resetEntry",
+				"command": "Microbit-Explorer.resetEntry",
+				"category": "micro:bit Explorer",
 				"title": "%package.reset_micro_bit%",
 				"icon": {
 					"light": "image/light/shutdown.svg",
@@ -216,7 +239,8 @@
 				}
 			},
 			{
-				"command": "microbit.disconnectEntry",
+				"command": "Microbit-Explorer.disconnectEntry",
+				"category": "micro:bit Explorer",
 				"title": "%package.disconnect%",
 				"icon": {
 					"light": "image/light/disconnect.svg",
@@ -224,7 +248,8 @@
 				}
 			},
 			{
-				"command": "microbit.updateFirmware",
+				"command": "Microbit-Explorer.updateFirmware",
+				"category": "micro:bit Explorer",
 				"title": "%package.update_or_reinstall_firmware%",
 				"icon": {
 					"light": "image/light/update16.svg",
@@ -235,61 +260,61 @@
 		"menus": {
 			"view/title": [
 				{
-					"command": "microbit.updateFirmware",
+					"command": "Microbit-Explorer.updateFirmware",
 					"when": "view == microbit-explorer-view",
 					"group": "navigation@0"
 				},
 				{
-					"command": "microbit.disconnectEntry",
+					"command": "Microbit-Explorer.disconnectEntry",
 					"when": "view == microbit-explorer-view",
 					"group": "navigation@1"
 				},
 				{
-					"command": "microbit.resetEntry",
+					"command": "Microbit-Explorer.resetEntry",
 					"when": "view == microbit-explorer-view",
 					"group": "navigation@2"
 				},
 				{
-					"command": "microbit.downloadEntry",
+					"command": "Microbit-Explorer.downloadEntry",
 					"when": "view == microbit-explorer-view",
 					"group": "navigation@3"
 				},
 				{
-					"command": "microbit.uploadEntry",
+					"command": "Microbit-Explorer.uploadEntry",
 					"when": "view == microbit-explorer-view",
 					"group": "navigation@4"
 				},
 				{
-					"command": "microbit.refreshEntry",
+					"command": "Microbit-Explorer.refreshEntry",
 					"when": "view == microbit-explorer-view",
 					"group": "navigation@5"
 				}
 			],
 			"view/item/context": [
 				{
-					"command": "microbit.deleteEntry",
+					"command": "Microbit-Explorer.deleteEntry",
 					"when": "view == microbit-explorer-view && viewItem == MicrobitFile"
 				},
 				{
-					"command": "microbit.downloadThisFile",
+					"command": "Microbit-Explorer.downloadThisFile",
 					"when": "view == microbit-explorer-view && viewItem == MicrobitFile"
 				}
 			],
 			"editor/title": [
 				{
 					"when": "resourceExtname == .py",
-					"command": "microbit.sendFileToMicrobitMain",
+					"command": "Microbit-Explorer.sendFileToMicrobitMain",
 					"group": "navigation@1"
 				}
 			],
 			"explorer/context": [
 				{
-					"command": "microbit.sendFileToMicrobit",
+					"command": "Microbit-Explorer.sendFileToMicrobit",
 					"when": "resourceScheme == file && resourceExtname == .py",
 					"group": "microbit@0"
 				},
 				{
-					"command": "microbit.sendCleanedFileToMicrobit",
+					"command": "Microbit-Explorer.sendCleanedFileToMicrobit",
 					"when": "resourceScheme == file && resourceExtname == .py",
 					"group": "microbit@1"
 				}
@@ -303,7 +328,7 @@
 		],
 		"keybindings": [
 			{
-				"command": "microbit.sendFileToMicrobitMain",
+				"command": "Microbit-Explorer.sendFileToMicrobitMain",
 				"key": "%package.ctrl_alt_u%"
 			},
 			{

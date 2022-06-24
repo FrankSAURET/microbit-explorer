@@ -1,4 +1,6 @@
 # Change Log
+## [0.2.5] -  juin 2022
+* Ajout d'un commande permettant d'affihcer le brochage de la micro:bit.
 ## [0.2.4] - 22 juin 2022
 * Fait une vérification de la connexion avant d'afficher microbit prêt.
 * Permet la mise à jour du firmware.
@@ -33,6 +35,7 @@
 * ??? Implémenter le flashage ???. Voir ce que ça apporte notamment, est-il possible de compiler un hex avec plusieurs modules et de l'envoyer. voir si ça produit un fichier minimaliste.
 * Implémenter la simulation.
 * Afficher les icônes seulement si on est sur un fichier microbit (qui contient from microbit import * ou import microbit). Créer un langage ? https://code.visualstudio.com/api/references/contribution-points#contributes.languages 
+* Sélectionner les boutons à afficher.
 * La fonction sélection du port devant s'imposer comme port de connexion  pour toutes les autres commandes - ouvrir un panneau de connexion qui permet d'identifier toutes les microbit connectées et d'afficher leur port de connexion sur chacune.
 * nettoyer les trucs inutiles.
 * Faire un pas à pas.
@@ -40,8 +43,10 @@
 * ???Ajouter une fonctionnalité de renomage dans l'explorateur.???
 * Implémenter le glisser déposer pour upload et download.
 * ??? Déplacement du bouton "télécharger tous les fichier" dans l'explorateur PC.???
-* Afficher les bornes de la microbit.
 * Afficher une liste d'exemple.
+* Un bug se produit si l'explorateur micro:bit est ouvert dans le paneau de droite.
+
+
 
 
 

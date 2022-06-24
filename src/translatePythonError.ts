@@ -30,8 +30,11 @@ export function translateError(stringToTranslate: string, pathToTranslationFile:
         //Remplacement des ❰param❱ dans la regex
         let re = /❰[^❱]*❱/g;
         let regex = new RegExp(anglais.replace(re, ".*"))
+        let temp = anglais.replace(re, ".*");
         let index: number[] = [];
         let longueurBout: number[] = [];
+
+
 
         if (regex.test(chaineON2)) {
             //Découpage en bout de chaine entre ❰param❱
@@ -49,6 +52,23 @@ export function translateError(stringToTranslate: string, pathToTranslationFile:
                 let fin = index[j + 1];
                 let paramCourant = chaineON2.substring(debut, fin);
                 let numParam = j + 1;
+                // Pour corriger le fait que le python compte le self comme paramètre caché
+                let fixHiddenArgument: boolean = vscode.workspace.getConfiguration("Microbit-Explorer").get("fixHiddenArgument");
+                if (fixHiddenArgument) {
+                    let regexErreurPython1 = new RegExp(".*\\(\\) takes .* positional arguments but .* were given");
+                    let regexErreurPython2 = new RegExp("function takes .* positional arguments but .* were given");
+                    if (regexErreurPython1.test(chaineON2)) {
+                        if (numParam > 1) {
+                            let nb = parseInt(paramCourant) - 1;
+                            paramCourant = nb.toString();
+                        }
+                    }
+                    if (regexErreurPython2.test(chaineON2)) {
+                        let nb = parseInt(paramCourant) - 1;
+                        paramCourant = nb.toString();
+                    }
+                }
+                //***************************************************
                 let regex2 = new RegExp("❰param" + numParam + "❱", 'g');
                 chaineTN2 = chaineTN2.replace(regex2, paramCourant);
             }
