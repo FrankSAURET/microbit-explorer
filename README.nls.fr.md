@@ -69,7 +69,7 @@ https://user-images.githubusercontent.com/1547522/164513525-d6d341de-2d4d-4e49-8
  1. Dupliquez l’un des dossiers Stubs-Electropol-XX. 
  1. Renommez ce dossier avec le code local (https://code.visualstudio.com/docs/getstarted/locales). 
  1. Traduire (Error est dans « Micropython\error.json ») 
- 1. Exploitez la demande ou envoyez-moi par message privé. 
+ 1. Faites un pull request ou envoyez-moi un message privé. 
  ### Interface  
  1. Vous pouvez utiliser l’extension « i18n ally » comme recommandé. 
  1. Dupliquez le fichier avec le code local que vous comprenez (dans src\locales). 
@@ -79,7 +79,7 @@ https://user-images.githubusercontent.com/1547522/164513525-d6d341de-2d4d-4e49-8
  1. Si vous souhaitez tester, copiez le fichier dans le dossier racine et renommez-le comme « package.nls.xx.json » où xx est le code local. 
  ## Liens rapides 
 
- * [Micro:bits micropython] (https://microbit-microphython.readthedocs.io/en/v2-docs) 
+* [Micro:bits micropython](https://microbit-micropython.readthedocs.io/fr/latest/microbit_micropython_api.html)
 
  ## Contribution 
  Les contributions sont toujours les bienvenues.

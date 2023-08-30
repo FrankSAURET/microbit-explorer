@@ -6,6 +6,7 @@ import { env } from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
 import i18n from './i18n';
+import { Utils } from 'vscode-uri';
 
 export var term: vscode.Terminal;
 
@@ -204,7 +205,7 @@ function showPinMap(cheminExtension): any {
 		titre,
 		vscode.ViewColumn.Active, {
 	});
-	const imagePinOut = panel.webview.asWebviewUri(vscode.Uri.file(vscode.Uri.joinPath(cheminExtension, "image", i18n.t('extension.pinoutv2v1_png')).fsPath));
+	const imagePinOut = panel.webview.asWebviewUri(vscode.Uri.file(Utils.joinPath(cheminExtension, "image", i18n.t('extension.pinoutv2v1_png')).fsPath));
 		
 	let CodeHTML =`
 	<!DOCTYPE html>
