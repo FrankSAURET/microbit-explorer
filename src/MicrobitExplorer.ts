@@ -6,6 +6,7 @@ import internal = require('stream');
 import { disconnect } from 'process';
 import { connect } from 'http2';
 import { translateError } from './translatePythonError';
+import * as usb from 'usb';
 
 
 const fs = require('fs').promises;
@@ -32,17 +33,32 @@ export class MicrobitFileProvider implements vscode.TreeDataProvider<MicrobitFil
 	private errorPythonFile = path.join(this.extraPaths.filter(path => path.search("micropython") > -1)[0], "error.json");
 
 	private _onDidChangeTreeData: vscode.EventEmitter<MicrobitFile | undefined | void> = new vscode.EventEmitter<MicrobitFile | undefined | void>();
-	readonly onDidChangeTreeData: vscode.Event<MicrobitFile | undefined | void> = this._onDidChangeTreeData.event;
+	readonly onDidChangeTreeData: vscode.Event<MicrobitFile | null> | undefined;
 
 	constructor(private workspaceRoot: string | undefined) {
 		this.MicroBitOutput = vscode.window.createOutputChannel("micro:bit", "output-microbit");
 		this.testConnexion();
+
+		
+		// Détecter les événements USB VID: 0x0d28 PID: 0x0204
+		usb.on('attach', (device) => {
+			const message = `USB branchée: ${device.deviceDescriptor.iProduct}`;
+			vscode.window.showInformationMessage(message);
+		});
+
+		usb.on('detach', (device) => {
+			const message = `USB débranchée: ${device.deviceDescriptor.iProduct}`;
+			vscode.window.showInformationMessage(message);
+		});
+
+
 		// this.ResetMicroBit();
 		// this.term = vscode.window.createTerminal("micro:bit");
 		// this.MicroBitOutput.append || appendline || clear || replace ||
 		// https://code.visualstudio.com/api/references/vscode-api#OutputChannel
 		// https://code.visualstudio.com/api/references/vscode-api#Terminal
 	};
+
 	public async testConnexion() {
 		await this.Connect();
 
